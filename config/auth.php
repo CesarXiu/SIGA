@@ -45,6 +45,10 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+        'api-consumer' => [
+            'driver' => 'passport',
+            'provider' => 'consumers',
+        ],
     ],
 
     /*
@@ -68,6 +72,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+        'consumers' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Consumidor::class),
         ],
 
         // 'users' => [
