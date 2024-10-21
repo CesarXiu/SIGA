@@ -71,11 +71,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => env('AUTH_MODEL', App\Models\Passport\User::class),
         ],
         'consumers' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Consumidor::class),
+            'model' => env('AUTH_MODEL', App\Models\Siga\Consumidor::class),
         ],
 
         // 'users' => [
