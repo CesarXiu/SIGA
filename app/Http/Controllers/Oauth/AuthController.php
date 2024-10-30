@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Passport\User;
 use Illuminate\Support\Facades\Hash;
+//VALIDACION DE PERMISO A RUTA//
+use App\Models\Siga\Ruta;
 //<PRUEBAS>//
 use Illuminate\Support\Facades\DB;
 use App\Models\Siga\Consumidor;
@@ -57,12 +59,27 @@ class AuthController extends Controller
         } else {
             return response()->json(['error' => 'Consumer not found'], 404);
         }
-        $rol = $request->user();
+        $rol = $request->user()  ;
         //dd($rol);
-        $consumer->getRol->permisos;
+        //VALIDAR ACCESO A RUTA
+        $permisos = $consumer->getRol->permisos;
+        $ruta = $request->query('route');
+        $rutaDB = Ruta::where('ruta', $ruta)->first();
+        if ($rutaDB) {
+            $rutaScope = $rutaDB->scope;
+            $scopeExists = collect($permisos)->contains('scope', $rutaScope);
+
+            if (!$scopeExists) {
+            return response()->json(['error' => 'Access denied: scope not found in permissions','ruta' => $ruta], 403);
+            }
+        } else {
+            return response()->json(['error' => 'Route not found'], 404);
+        }
+        //->getScope
         \Log::info('Query Log:', DB::getQueryLog());
         return response()->json([
-            'consumer' => $consumer->getRol
-        ]);
+            'consumer' => $consumer->getRol,
+            'acceso' => ($scopeExists) ? 'Permitido' : 'Denegado'
+        ], ($scopeExists) ? 200 : 401);
     }
 }
