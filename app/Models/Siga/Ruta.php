@@ -12,7 +12,7 @@ class Ruta extends Model
         'activo' => true
     ];
     protected $fillable = [
-        'nombre', 
+        'metodo', 
         'descripcion',
         'ruta',
         'activo',
@@ -23,16 +23,21 @@ class Ruta extends Model
     {
         return [
             'activo' => 'boolean',
-            'nombre' => 'string',
-            'descripcion' => 'string'
+            'metodo' => 'string',
+            'descripcion' => 'string',
+            'ruta' => 'string'
         ];
     }
     public function uniqueIds(): array
     {
-        return ['enid'];
+        return ['ruid'];
     }
-    public function getRutas()
+    public function getEndpoint()
     {
-        return $this->belongsTo(Rol::class, 'rol');
+        return $this->belongsTo(EndPoint::class, 'endpoint');
+    }
+    public function getScope()
+    {
+        return $this->belongsTo(Scope::class, 'scope');
     }
 }
