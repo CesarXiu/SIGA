@@ -48,7 +48,7 @@ class Consumidor extends Authenticatable
 
     public function getRol(): BelongsTo
     {
-        \Log::info('Entramos a la relacion');
+        //\Log::info('Entramos a la relacion');
         return $this->belongsTo(Rol::class, 'rol');
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Models\Siga;
+
 use App\Models\BaseModel as Model;
 
-class Rol extends Model
+class EndPoint extends Model
 {
-    protected $table = 'roles';
-    protected $primaryKey = 'roid';
+    protected $table = 'endpoints';
+    protected $primaryKey = 'enid';
     protected $attributes = [
         'activo' => true
     ];
@@ -18,21 +19,17 @@ class Rol extends Model
     protected function casts(): array
     {
         return [
+            'activo' => 'boolean',
             'nombre' => 'string',
-            'descripcion' => 'string',
-            'activo' => 'boolean'
+            'descripcion' => 'string'
         ];
     }
     public function uniqueIds(): array
     {
-        return ['roid'];
+        return ['enid'];
     }
-    public function getConsumidores()
+    public function getRutas()
     {
-        return $this->hasMany(Consumidor::class, 'rol');
-    }
-    public function permisos()
-    {
-        return $this->hasMany(Permiso::class, 'rol');
+        return $this->belongsTo(Rol::class, 'rol');
     }
 }

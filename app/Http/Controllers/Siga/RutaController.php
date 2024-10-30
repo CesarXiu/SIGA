@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
-use App\Models\Siga\Rol;
+use App\Models\Siga\Ruta;
 use Illuminate\Http\Request;
 
-class RolController extends Controller
+class RutaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,13 +23,13 @@ class RolController extends Controller
     {
         $data = $request->json()->all();
         //dd($data);
-        return Rol::create($data);
+        return Ruta::create($data);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Rol $rol)
+    public function show(Ruta $ruta)
     {
         //
     }
@@ -37,7 +37,7 @@ class RolController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, Ruta $ruta)
     {
         //
     }
@@ -45,7 +45,7 @@ class RolController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rol $rol)
+    public function destroy(Ruta $ruta)
     {
         //
     }

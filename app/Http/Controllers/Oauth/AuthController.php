@@ -59,6 +59,7 @@ class AuthController extends Controller
         }
         $rol = $request->user();
         //dd($rol);
+        $consumer->getRol->permisos;
         \Log::info('Query Log:', DB::getQueryLog());
         return response()->json([
             'consumer' => $consumer->getRol
