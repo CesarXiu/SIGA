@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Scope;
-use Illuminate\Http\Request;
+use App\Http\Requests\Siga\ScopeRequest as Request;
 
 class ScopeController extends Controller
 {
@@ -21,7 +21,7 @@ class ScopeController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
+        $data = $request->validated();
         return Scope::create($data);
     }
 

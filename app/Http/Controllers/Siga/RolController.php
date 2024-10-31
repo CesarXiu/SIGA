@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Rol;
-use Illuminate\Http\Request;
+use App\Http\Requests\Siga\RolRequest as Request;
 
 class RolController extends Controller
 {
@@ -21,8 +21,9 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
-        //dd($data);
+        dd($request);
+        $data = $request->validated();
+        dd($data);
         return Rol::create($data);
     }
 

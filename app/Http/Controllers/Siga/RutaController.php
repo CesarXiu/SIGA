@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Ruta;
-use Illuminate\Http\Request;
+use App\Http\Requests\Siga\RutaRequest as Request;
 
 class RutaController extends Controller
 {
@@ -21,7 +21,7 @@ class RutaController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
+        $data = $request->validated();
         //dd($data);
         return Ruta::create($data);
     }

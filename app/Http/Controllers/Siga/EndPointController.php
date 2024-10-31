@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siga\EndPoint;
-use Illuminate\Http\Request;
+use App\Http\Requests\Siga\EndPointRequest as Request;
 
 class EndPointController extends Controller
 {
@@ -21,7 +21,7 @@ class EndPointController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
+        $data = $request->validated();
         //dd($data);
         return EndPoint::create($data);
     }
