@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Consumidor;
-use Illuminate\Http\Request;
+use App\Http\Requests\Siga\ConsumidorRequest as Request;
 
 class ConsumidorController extends Controller
 {
@@ -21,7 +21,7 @@ class ConsumidorController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
+        $data = $request->validated();
         return Consumidor::create($data);
     }
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Permiso;
-use Illuminate\Http\Request;
+use App\Http\Requests\Siga\PermisoRequest as Request;
 
 class PermisoController extends Controller
 {
@@ -21,7 +21,7 @@ class PermisoController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
+        $data = $request->validated();
         //dd($data);
         return Permiso::create($data);
     }
