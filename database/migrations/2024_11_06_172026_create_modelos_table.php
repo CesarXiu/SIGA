@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('solicitudes', function (Blueprint $table) {
-            $table->uuid('soid')->primary();
+        Schema::create('modelos', function (Blueprint $table) {
+            $table->uuid('moid')->primary();
+            $table->string('nombre');
             $table->string('descripcion');
-            $table->string('correo')->unique();
-            $table->boolean('resuelto')->default(false);
-            $table->foreignId('propietario')->constrained('users');
+            $table->binary('data');
+            $table->uuid('solicitud');
+            $table->foreign('solicitud')->references('soid')->on('solicitudes');
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('solicitudes');
+        Schema::dropIfExists('modelos');
     }
 };

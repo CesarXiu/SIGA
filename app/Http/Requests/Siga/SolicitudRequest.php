@@ -24,9 +24,15 @@ class SolicitudRequest extends FormRequest
         return [
             'descripcion' => 'required|string',
             'correo' => 'required|email',
-            'resuelto' => 'required|boolean',
-            'archivos' => 'array',
-            'propietario' => 'required|string|exists:users,id',
+            'resuelto' => 'boolean',
+            'archivos' => 'required|array',
+            'archivos.*.nombre' => 'required|string',
+            'archivos.*.descripcion' => 'required|string',
+            'archivos.*.data' => 'required|array',
+            'archivos.*.data.*.nombre' => 'required|string',
+            'archivos.*.data.*.descripcion' => 'required|string',
+            'archivos.*.data.*.tipo' => 'required|in:int,string,boolean',
+            'propietario' => 'required|string|exists:users,id',//regex:/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/|
         ];
     }
 }

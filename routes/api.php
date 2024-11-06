@@ -10,6 +10,7 @@ use App\Http\Controllers\Siga\ConsumidorController;
 use App\Http\Controllers\Siga\PermisoController;
 use App\Http\Controllers\Siga\EndPointController;
 use App\Http\Controllers\Siga\RutaController;
+use App\Http\Controllers\Siga\SolicitudController;
 //MODELOS
 use App\Models\Siga\Consumidor;
 
@@ -25,3 +26,4 @@ Route::resource('consumidores', ConsumidorController::class)->middleware('auth:a
 Route::resource('permisos', PermisoController::class)->middleware('auth:api');
 Route::resource('endpoints', EndPointController::class)->middleware('auth:api');
 Route::resource('rutas', RutaController::class)->middleware('auth:api');
+Route::resource('solicitudes', SolicitudController::class);//->middleware('auth:api');
