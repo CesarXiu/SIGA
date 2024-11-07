@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Modelos;
-use Illuminate\Http\Request;
+use App\Http\Requests\Siga\ModeloRequest as Request;
 
 class ModeloController extends Controller
 {
@@ -13,7 +13,10 @@ class ModeloController extends Controller
      */
     public function index()
     {
-        //
+        $modelos = Modelos::all();
+        return response()->json([
+            "modelos" => $modelos
+        ]);
     }
 
     /**
@@ -21,7 +24,11 @@ class ModeloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validated();
+        $modelo = Modelos::createModelo($data);
+        return response()->json([
+            "modelo" => $modelo
+        ]);
     }
 
     /**

@@ -30,11 +30,20 @@ class Modelos extends Model
     public function storeData($json){
         $this->data = json_encode($json);
     }
-    public function getData(){
+    private function getData(){
         return json_decode($this->data);
     }
     public function getSolicitud()
     {
         return $this->belongsTo(Solicitud::class, 'solicitud');
+    }
+    public static function createModelo($modelo){
+        $model = new Modelos();
+        $model->nombre = $modelo['nombre'];
+        $model->descripcion = $modelo['descripcion'];
+        $model->solicitud = $modelo['solicitud'];
+        $model->storeData($modelo['data']);
+        $model->save();
+        return $model;
     }
 }
