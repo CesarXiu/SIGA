@@ -55,7 +55,8 @@
                     Ingresar
                 </button>
             </form>
-            Don't have an account? <a href="{{route('register')}}">Register here</a>
+            <br>
+            <a href="{{route('register')}}" class="text-blue-500 hover:text-blue-700 underline font-semibold">Don't have an account? Register here</a>
         </div>
     </div>
 <!--<form action="{{route('login.post')}}" method="POST">

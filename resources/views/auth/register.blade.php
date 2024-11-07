@@ -66,7 +66,9 @@
                         <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 rounded-md focus:outline-none focus:shadow-outline">
                             Register</button>
                         <br>
-                        <a href="{{route('login')}}"> Already have an account?  Login here</a>
+                        <br>
+                        <a href="{{ route('login') }}" class="text-blue-500 hover:text-blue-700 underline font-semibold"> Already have an account? Login here</a>
+
                     </form>
 <div>
 @endsection
