@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siga;
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Solicitud;
 use App\Http\Requests\Siga\SolicitudRequest as Request;
+use App\Models\Siga\Modelos;
 
 class SolicitudController extends Controller
 {
@@ -22,8 +23,21 @@ class SolicitudController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
-        dd($data);
-        return Solicitud::create($data);
+        //dd($data);
+        $solicitud = Solicitud::create($data);
+        $modelos = $data['archivos'];
+        foreach($modelos as $modelo){
+            $model = new Modelos();
+            $model->nombre = $modelo['nombre'];
+            $model->descripcion = $modelo['descripcion'];
+            $model->solicitud = $solicitud->soid;
+            $model->storeData($modelo['data']);
+            $model->save();
+        }
+        $solicitud->getModelos;
+        return response()->json([
+            "solicitud" => $solicitud
+        ]);
     }
 
     /**

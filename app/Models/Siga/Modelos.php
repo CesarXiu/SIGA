@@ -27,6 +27,12 @@ class Modelos extends Model
     {
         return ['moid'];
     }
+    public function storeData($json){
+        $this->data = json_encode($json);
+    }
+    public function getData(){
+        return json_decode($this->data);
+    }
     public function getSolicitud()
     {
         return $this->belongsTo(Solicitud::class, 'solicitud');
