@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Oauth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Passport\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 //VALIDACION DE PERMISO A RUTA//
 use App\Models\Siga\Ruta;
