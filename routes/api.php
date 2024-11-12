@@ -14,6 +14,8 @@ use App\Http\Controllers\Siga\SolicitudController;
 use App\Http\Controllers\Siga\ModeloController;
 //MODELOS
 use App\Models\Siga\Consumidor;
+//EXCEPCIONES
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 // RUTAS DE PRUEBA //
 Route::get('/user', function (Request $request) {

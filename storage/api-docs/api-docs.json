@@ -1,0 +1,390 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de SIGA",
+        "description": "API REST SIGA: Sistema de Gestión de Accesos",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/scopes": {
+            "get": {
+                "tags": [
+                    "Scopes"
+                ],
+                "summary": "Obtienes la informacion de los Scopes.",
+                "description": "Obten la informacion de todos los SCOPE.",
+                "operationId": "d104a22e2bfdc23a2adeee4e37e4ce30",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9d78f245-f961-4b5a-95cb-86b20e5602af"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "scope"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": false
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "nombre.read"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Scopes"
+                ],
+                "summary": "Crear un nuevo scope.",
+                "description": "Crea un nuevo SCOPE.",
+                "operationId": "36dbd4bc2a6b039e90aa58cbcf46e6aa",
+                "requestBody": {
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": "true"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "alumno.read"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d78f245-f961-4b5a-95cb-86b20e5602af"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "scope"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "nombre.read"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/scopes/{id}": {
+            "get": {
+                "tags": [
+                    "Scopes"
+                ],
+                "summary": "Obtienes la informacion de un scope.",
+                "description": "Obten la informacion de un SCOPE.",
+                "operationId": "35e89daea661e2ef347e92f7eafb208a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID del Scope",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d78f245-f961-4b5a-95cb-86b20e5602af"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d78f245-f961-4b5a-95cb-86b20e5602af"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "scope"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": false
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "nombre.read"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Scopes"
+                ],
+                "summary": "Actualiza la informacion de una scope.",
+                "description": "Actualizar informacion de un SCOPE.",
+                "operationId": "13616acd31d578203e66d38c1f74d18d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID del Scope",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d78f245-f961-4b5a-95cb-86b20e5602af"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "alumno.read"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d78f245-f961-4b5a-95cb-86b20e5602af"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "scope"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": false
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "nombre.read"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Passport Token",
+                "name": "Passport JWT",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Scopes",
+            "description": "Información sobre los alcances, nombre y estatus de los mismos."
+        }
+    ]
+}

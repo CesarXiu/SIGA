@@ -3,7 +3,7 @@
 namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Http\Resources\ScopeResource as Resource;
 
 class Scope extends Model
 {
@@ -26,5 +26,14 @@ class Scope extends Model
     public function uniqueIds(): array
     {
         return ['scid'];
+    }
+
+    public function resource()
+    {
+        return ["data" => Resource::make($this)];
+    }
+    public static function resourceCollection($data)
+    {
+        return ["data" => Resource::collection($data)];
     }
 }
