@@ -354,9 +354,49 @@ class ScopeController extends Controller
         , 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+/**
+ * Elimina un SCOPE.
+ * @OA\Delete(
+ *     path="/api/scopes/{id}",
+ *     summary="Elimina un scope y sus relaciones.",
+ *     security={{"apiAuth":{}}},
+ *     tags={"Scopes"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="UUID del Scope",
+ *         @OA\Schema(
+ *             type="string",
+ *             example="9d78f245-f961-4b5a-95cb-86b20e5602af"
+ *         )
+ *     ),
+ * @OA\Response(
+ *   response="204",
+ *   description="No Content",
+ *   @OA\MediaType(
+ *       mediaType="application/vnd.api+json",
+ *       example=null
+ *   )
+ *),
+ *@OA\Response(
+ *         response="500",
+ *         description="Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+ *         @OA\MediaType(
+ *             mediaType="application/vnd.api+json",
+ *             example={"error": "Error interno del servidor"}
+ *         )
+ *     ),
+ *@OA\Response(
+ *         response="404",
+ *         description="Recurso no encontrado.",
+ *         @OA\MediaType(
+ *             mediaType="application/vnd.api+json",
+ *             example={"error": "Not found."}
+ *         )
+ *     )
+ * )
+ */
     public function destroy(Scope $scope)
     {
         $scope->delete();

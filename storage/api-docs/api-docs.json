@@ -366,6 +366,61 @@
                         "apiAuth": []
                     }
                 ]
+            },
+            "delete": {
+                "tags": [
+                    "Scopes"
+                ],
+                "summary": "Elimina un scope y sus relaciones.",
+                "description": "Elimina un SCOPE.",
+                "operationId": "706ac208667f0da302d6e125b0e2b322",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID del Scope",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d78f245-f961-4b5a-95cb-86b20e5602af"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": null
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         }
     },
