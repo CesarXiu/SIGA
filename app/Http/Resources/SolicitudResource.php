@@ -14,15 +14,15 @@ class SolicitudResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        //$solicitud = $this->resource;
+        $solicitud = $this->resource;
         return [
-            'id' => $this->soid,
+            'id' => $solicitud->soid,
             'type' => 'solicitud',
             'attributes' => [
-                'correo' => $this->correo,
-                'descripcion' => $this->descripcion,
-                'resuelto' => $this->resuelto,
-                'propietario' => $this->propietario,
+                'correo' => $solicitud->correo,
+                'descripcion' => $solicitud->descripcion,
+                'resuelto' => $solicitud->resuelto,
+                'propietario' => $solicitud->propietario,
             ],
         ];
     }

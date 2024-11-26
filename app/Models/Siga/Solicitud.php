@@ -3,13 +3,18 @@
 namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
+
+use App\Http\Resources\SolicitudResource as Resource;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use Symfony\Component\HttpKernel\Exception\HttpException; 
 class Solicitud extends Model
 {
     protected $table = 'solicitudes';
     protected $primaryKey = 'soid';
+    public function getRouteKeyName()
+    {
+        return 'soid';
+    }
+
     protected $attributes = [
         'resuelto' => false
     ];
@@ -47,5 +52,13 @@ class Solicitud extends Model
     public function getModelos()
     {
         return $this->hasMany(Modelos::class, 'solicitud');
+    }
+    public static function resourceCollection($data)
+    {
+        return ["data" => Resource::collection($data)];
+    }
+    public function resource()
+    {
+        return ["data" => Resource::make($this)];
     }
 }

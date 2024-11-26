@@ -14,7 +14,9 @@ class SolicitudController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(
+            Solicitud::resourceCollection(Solicitud::all())
+        );
     }
 
     /**
@@ -35,9 +37,9 @@ class SolicitudController extends Controller
             $model->save();
         }
         $solicitud->getModelos;
-        return response()->json([
-            "solicitud" => $solicitud
-        ]);
+        return response()->json(
+            $solicitud->resource()
+        );
     }
 
     /**
@@ -45,7 +47,12 @@ class SolicitudController extends Controller
      */
     public function show(Solicitud $solicitud)
     {
-        //
+        //$solicitud = Solicitud::find("9d93c2ee-c35f-483e-a344-12638fb01d40");
+        dd($solicitud);
+        //$solicitud->getModelos;
+        return response()->json(
+            $solicitud->resource()
+        );
     }
 
     /**
