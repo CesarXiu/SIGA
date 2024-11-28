@@ -33,7 +33,8 @@ class SolicitudRequest extends FormRequest
             'archivos.*.data.*.nombre' => 'required|string',
             'archivos.*.data.*.descripcion' => 'required|string',
             'archivos.*.data.*.tipo' => 'required|in:int,string,boolean',
-            'propietario' => 'required|string|exists:users,id',//regex:/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/|
+            'propietario' => 'required|string|exists:users,id',
         ];
     }
+    ////regex:/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/|
 }

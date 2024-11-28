@@ -422,6 +422,533 @@
                     }
                 ]
             }
+        },
+        "/api/solicitudes": {
+            "get": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Obtienes la informacion de las Solicitudes.",
+                "description": "Obten la informacion de todas las solicitudes.",
+                "operationId": "c53c76b568b4e5b1c2bc9194d5d10358",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9d992375-4091-4182-9e9b-789c0c569537"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "solicitud"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Residencias Profesionales"
+                                                            },
+                                                            "correo": {
+                                                                "type": "string",
+                                                                "example": "cesarx@gmail.com"
+                                                            },
+                                                            "descripcion": {
+                                                                "type": "string",
+                                                                "example": "Esta es la nueva descripcion de la solicitud"
+                                                            },
+                                                            "resuelto": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "propietario": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "relationships": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Actualiza la informacion de la solicitud indicada.",
+                "description": "Actualiza la informacion de una Solicitud.",
+                "operationId": "791045cd58d7f406cba366f3b14db9a5",
+                "requestBody": {
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Residencias Profesionales"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "cesarx@gmail.com"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Esta es la nueva descripcion de la solicitud"
+                                    },
+                                    "resuelto": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "archivos": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "nombre": {
+                                                    "type": "string",
+                                                    "example": "Archivo 1"
+                                                },
+                                                "descripcion": {
+                                                    "type": "string",
+                                                    "example": "Descripcion del archivo 1"
+                                                },
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "Dato 1"
+                                                            },
+                                                            "descripcion": {
+                                                                "type": "string",
+                                                                "example": "Descripcion del dato 1"
+                                                            },
+                                                            "tipo": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "int",
+                                                                    "string",
+                                                                    "boolean"
+                                                                ],
+                                                                "example": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "propietario": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d992375-4091-4182-9e9b-789c0c569537"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "solicitud"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "Residencias Profesionales"
+                                                        },
+                                                        "correo": {
+                                                            "type": "string",
+                                                            "example": "cesarx@gmail.com"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Esta es la nueva descripcion de la solicitud"
+                                                        },
+                                                        "resuelto": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "propietario": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relationships": {
+                                                    "properties": {
+                                                        "modelos": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "properties": {
+                                                                    "moid": {
+                                                                        "type": "string",
+                                                                        "example": "9d992376-e922-4853-8b8e-6de495ddd3cc"
+                                                                    },
+                                                                    "nombre": {
+                                                                        "type": "string",
+                                                                        "example": "Alumnos"
+                                                                    },
+                                                                    "descripcion": {
+                                                                        "type": "string",
+                                                                        "example": "Informacion de los alumnos"
+                                                                    },
+                                                                    "campos": {
+                                                                        "type": "array",
+                                                                        "items": {
+                                                                            "properties": {
+                                                                                "nombre": {
+                                                                                    "type": "string",
+                                                                                    "example": "nombre"
+                                                                                },
+                                                                                "descripcion": {
+                                                                                    "type": "string",
+                                                                                    "example": "nombre del alumno"
+                                                                                },
+                                                                                "tipo": {
+                                                                                    "type": "string",
+                                                                                    "example": "string"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/solicitudes/{id}": {
+            "get": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Obtienes la informacion de la solicitud indicada.",
+                "description": "Obten la informacion de una Solicitud.",
+                "operationId": "8820e19515106653baf1a8c503f28428",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID de la Solicitud",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d992375-4091-4182-9e9b-789c0c569537"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d992375-4091-4182-9e9b-789c0c569537"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "solicitud"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "Residencias Profesionales"
+                                                        },
+                                                        "correo": {
+                                                            "type": "string",
+                                                            "example": "cesarx@gmail.com"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Esta es la nueva descripcion de la solicitud"
+                                                        },
+                                                        "resuelto": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "propietario": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relationships": {
+                                                    "type": "array",
+                                                    "items": {}
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Actualiza la informacion de la solicitud indicada.",
+                "description": "Actualiza la informacion de una Solicitud.",
+                "operationId": "e4fcf3892b72dd0cc741c19ccde3c7fe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "UUID de la Solicitud",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d992375-4091-4182-9e9b-789c0c569537"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Residencias Profesionales"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "cesarx@gmail.com"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Esta es la nueva descripcion de la solicitud"
+                                    },
+                                    "resuelto": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d992375-4091-4182-9e9b-789c0c569537"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "solicitud"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "Residencias Profesionales"
+                                                        },
+                                                        "correo": {
+                                                            "type": "string",
+                                                            "example": "cesarx@gmail.com"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Esta es la nueva descripcion de la solicitud"
+                                                        },
+                                                        "resuelto": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "propietario": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relationships": {
+                                                    "type": "array",
+                                                    "items": {}
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -440,6 +967,10 @@
         {
             "name": "Scopes",
             "description": "Información sobre los alcances, nombre y estatus de los mismos."
+        },
+        {
+            "name": "Solicitudes",
+            "description": "Información sobre las solicitudes de informacion hechas al SII."
         }
     ]
 }
