@@ -46,4 +46,16 @@ class Modelos extends Model
         $model->save();
         return $model;
     }
+    public function updateModelo($modelo){
+        $this->nombre = $modelo['nombre'];
+        $this->descripcion = $modelo['descripcion'];
+        $this->storeData($modelo['data']);
+        $this->save();
+    }
+    /*
+        foreach($modelos as $modelo){
+            $model = new Modelos();
+            
+        }
+    */
 }

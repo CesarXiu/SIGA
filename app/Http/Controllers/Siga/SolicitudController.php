@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siga;
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Solicitud;
 use App\Http\Requests\Siga\SolicitudRequest as Request;
+use App\Http\Requests\Siga\SolicitudUpdateRequest as UpdateRequest;
 use App\Models\Siga\Modelos;
 
 class SolicitudController extends Controller
@@ -15,7 +16,7 @@ class SolicitudController extends Controller
     public function index()
     {
         return response()->json(
-            Solicitud::resourceCollection(Solicitud::all())
+            Solicitud::resourceCollection(Solicitud::Included()->get())
         );
     }
 
@@ -25,7 +26,6 @@ class SolicitudController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
-        //dd($data);
         $solicitud = Solicitud::create($data);
         $modelos = $data['archivos'];
         foreach($modelos as $modelo){
@@ -45,11 +45,9 @@ class SolicitudController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Solicitud $solicitud)
+    public function show($id)
     {
-        //$solicitud = Solicitud::find("9d93c2ee-c35f-483e-a344-12638fb01d40");
-        dd($solicitud);
-        //$solicitud->getModelos;
+        $solicitud = Solicitud::Included()->findOrFail($id);
         return response()->json(
             $solicitud->resource()
         );
@@ -58,9 +56,15 @@ class SolicitudController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Solicitud $solicitud)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        //dd($id);
+        $data = $request->validated();
+        $solicitud = Solicitud::findOrFail($id);
+        $solicitud->update($data);
+        return response()->json(
+            $solicitud->resource()
+        );
     }
 
     /**

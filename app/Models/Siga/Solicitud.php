@@ -20,6 +20,7 @@ class Solicitud extends Model
     ];
     protected $fillable = [
         'correo', 
+        'nombre', 
         'descripcion',
         'resuelto',
         'propietario'
@@ -27,17 +28,33 @@ class Solicitud extends Model
     protected function casts(): array
     {
         return [
+            'nombre' => 'string',
             'resuelto' => 'boolean',
             'descripcion' => 'string',
             'correo' => 'string'
         ];
     }
+    //Relaciones permitidas para incluir en la consulta.
+    protected $allowIncluded = ['Modelos'];
+
 
     public function modelos($modelos){
         try{
             Modelos::insert($modelos);
         }catch(\Exception $e){
             throw new HttpException(500, 'Error al insertar los modelos');
+        }
+    }
+    public function updateModelos($modelos){
+        foreach($modelos as $modelo){
+            $model = Modelos::find($modelo['moid']);
+            if($model){
+                $model->update($modelo);
+            }else{
+                $model = new Modelos();
+                $model->fill($modelo);
+                $model->save();
+            }
         }
     }
 

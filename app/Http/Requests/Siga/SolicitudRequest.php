@@ -23,6 +23,7 @@ class SolicitudRequest extends FormRequest
     {
         return [
             'descripcion' => 'required|string',
+            'nombre' => 'required|string',
             'correo' => 'required|email',
             'resuelto' => 'boolean',
             'archivos' => 'required|array',
