@@ -14,14 +14,15 @@ class ModeloResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $model = $this->resource;
         return [
-            'id' => $this->moid,
+            'id' => $model->moid,
             'type' => 'modelo',
             'attributes' => [
-                'nombre' => $this->nombre,
-                'descripcion' => $this->descripcion,
-                'data' => $this->data,
-                'solicitud' => $this->solicitud,
+                'nombre' => $model->nombre,
+                'descripcion' => $model->descripcion,
+                'solicitud' => $model->solicitud,
+                'data' => json_decode($model->data),
             ],
         ];
     }

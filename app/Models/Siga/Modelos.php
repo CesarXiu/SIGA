@@ -2,10 +2,13 @@
 
 namespace App\Models\Siga;
 use App\Models\BaseModel as Model;
-
+use App\Http\Resources\ModeloResource as Resource;
+use App\Http\Traits\UtilTraits;
 class Modelos extends Model
-{
+{   
+    use UtilTraits;
     protected $table = 'modelos';
+    protected $resource = Resource::class;
     protected $primaryKey = 'moid';
     /*protected $attributes = [
         'data' => null
@@ -52,10 +55,8 @@ class Modelos extends Model
         $this->storeData($modelo['data']);
         $this->save();
     }
-    /*
-        foreach($modelos as $modelo){
-            $model = new Modelos();
-            
-        }
-    */
+    protected static function getResourceClass()
+    {
+        return Resource::class;
+    }
 }

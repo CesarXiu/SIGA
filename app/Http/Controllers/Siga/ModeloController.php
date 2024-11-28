@@ -34,9 +34,12 @@ class ModeloController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Modelos $modelos)
+    public function show($id)
     {
-        //
+        $modelo = Modelos::find($id);
+        return response()->json(
+            $modelo->resource()
+        );
     }
 
     /**
