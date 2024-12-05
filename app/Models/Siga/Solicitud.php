@@ -10,6 +10,7 @@ class Solicitud extends Model
 {
     protected $table = 'solicitudes';
     protected $primaryKey = 'soid';
+    public $timestamps = true;
     public function getRouteKeyName()
     {
         return 'soid';

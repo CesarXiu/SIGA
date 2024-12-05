@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
+use App\Models\Siga\Modelos;
+
 
 class SolicitudResource extends JsonResource
 {
@@ -16,13 +19,9 @@ class SolicitudResource extends JsonResource
     {
         $solicitud = $this->resource;
         if ($solicitud->relationLoaded('getModelos')) {
-            $modelos = ["modelos" => $solicitud->getModelos->map(function ($modelo) {
-                return [
-                    'moid' => $modelo->moid,
-                    'nombre' => $modelo->nombre,
-                    'descripcion' => $modelo->descripcion,
-                    'campos' => json_decode($modelo->data),
-                ];
+            $relation = $solicitud->getModelos;
+            $modelos = ["modelos" => $relation->map(function ($modelo) {
+                return $modelo->resource()['data'];
             })];
         }
         $relationships = array_merge($modelos ?? []);
@@ -35,6 +34,7 @@ class SolicitudResource extends JsonResource
                 'descripcion' => $solicitud->descripcion,
                 'resuelto' => $solicitud->resuelto,
                 'propietario' => $solicitud->propietario,
+                'created_at' => Carbon::parse($solicitud->created_at)->diffForHumans()
             ],
             'relationships' => $relationships
         ];
