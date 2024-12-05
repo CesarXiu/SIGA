@@ -14,9 +14,7 @@ class ModeloController extends Controller
     public function index()
     {
         $modelos = Modelos::all();
-        return response()->json([
-            "modelos" => $modelos
-        ]);
+        return response()->json(Modelos::resourceCollection($modelos));
     }
 
     /**
@@ -26,9 +24,7 @@ class ModeloController extends Controller
     {
         $data = $request->validated();
         $modelo = Modelos::createModelo($data);
-        return response()->json([
-            "modelo" => $modelo
-        ]);
+        return response()->json($modelo->resource());
     }
 
     /**

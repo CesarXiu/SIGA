@@ -249,7 +249,7 @@ class ScopeController extends Controller
  */
     public function show(Scope $scope)
     {
-        dd($scope);
+        //dd($scope);
         return response()->json( 
             $scope->resource()
         , 200);
