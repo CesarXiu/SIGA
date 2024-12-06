@@ -7,6 +7,432 @@
     },
     "paths": {
         "/api": {},
+        "/api/endpoints": {
+            "get": {
+                "tags": [
+                    "EndPoints"
+                ],
+                "summary": "Obtienes la informacion de los EndPoints.",
+                "description": "Obten la informacion de todos los EndPoints.",
+                "operationId": "360de3577f28c6e7e50b43b3e58bd6de",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da7dcef-e7d5-4147-9b23-db00a55f7846"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "endPoint"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "Docentes"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Informacion de los docentes"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "EndPoints"
+                ],
+                "summary": "Crea un nuevo EndPoint.",
+                "description": "Crea un nuevo EndPoint.",
+                "operationId": "6cefda6bdeadc77324bb2c7c37acf88f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Docentes"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Informacion de los docentes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da7dcef-e7d5-4147-9b23-db00a55f7846"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "endPoint"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "Docentes"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Informacion de los docentes"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/endpoints/{id}": {
+            "get": {
+                "tags": [
+                    "EndPoints"
+                ],
+                "summary": "Obtienes la informacion de un EndPoint.",
+                "description": "Obten la informacion de un EndPoint.",
+                "operationId": "87bba7ecc47f5f23b4c071aa4d1180fe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del EndPoint",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9da7dcef-e7d5-4147-9b23-db00a55f7846"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da7dcef-e7d5-4147-9b23-db00a55f7846"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "endPoint"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "Docentes"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Informacion de los docentes"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "EndPoints"
+                ],
+                "summary": "Actualiza un EndPoint existente.",
+                "description": "Actualiza un EndPoint existente.",
+                "operationId": "74de3521b075d2db16cd15081e746ee7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del EndPoint",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9da7dcef-e7d5-4147-9b23-db00a55f7846"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Docentes"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Informacion de los docentes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da7dcef-e7d5-4147-9b23-db00a55f7846"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "endPoint"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "Docentes"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Informacion de los docentes"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "EndPoints"
+                ],
+                "summary": "Elimina un EndPoint.",
+                "description": "Elimina un EndPoint.",
+                "operationId": "70159e8f567c29c77eb39f4cda98189f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del EndPoint",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9da7dcef-e7d5-4147-9b23-db00a55f7846"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/scopes": {
             "get": {
                 "tags": [
@@ -520,8 +946,8 @@
                 "tags": [
                     "Solicitudes"
                 ],
-                "summary": "Actualiza la informacion de la solicitud indicada.",
-                "description": "Actualiza la informacion de una Solicitud.",
+                "summary": "Crea una nueva solicitud de informacion.",
+                "description": "Se creara la solicitud y sus modelos todo en una misma peticion.",
                 "operationId": "791045cd58d7f406cba366f3b14db9a5",
                 "requestBody": {
                     "content": {
@@ -964,6 +1390,10 @@
         }
     },
     "tags": [
+        {
+            "name": "EndPoints",
+            "description": "Información sobre los EndPoints disponibles."
+        },
         {
             "name": "Scopes",
             "description": "Información sobre los alcances, nombre y estatus de los mismos."

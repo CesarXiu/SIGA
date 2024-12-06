@@ -6,6 +6,8 @@ use App\Models\BaseModel as Model;
 
 use App\Http\Resources\SolicitudResource as Resource;
 use App\Models\User;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 class Solicitud extends Model
 {
     protected $table = 'solicitudes';
