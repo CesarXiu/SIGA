@@ -13,7 +13,7 @@ class RutaController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Ruta::resourceCollection(Ruta::all()));
     }
 
     /**
@@ -22,24 +22,28 @@ class RutaController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
-        //dd($data);
-        return Ruta::create($data);
+        $ruta = Ruta::create($data);
+        return response()->json($ruta->resource());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Ruta $ruta)
+    public function show($id)
     {
-        //
+        $ruta = Ruta::findOrFail($id);
+        return response()->json($ruta->resource());
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ruta $ruta)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->validated();
+        $ruta = Ruta::findOrFail($id);
+        $ruta->update($data);
+        return response()->json($ruta->resource());
     }
 
     /**
@@ -47,6 +51,7 @@ class RutaController extends Controller
      */
     public function destroy(Ruta $ruta)
     {
-        //
+        $ruta->delete();
+        return response()->json(null, 204);
     }
 }

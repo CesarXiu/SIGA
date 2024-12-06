@@ -1014,6 +1014,443 @@
                 ]
             }
         },
+        "/api/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Obtienes la informacion de los Roles.",
+                "description": "Obten la informacion de todos los Roles.",
+                "operationId": "dff71e7fc7e16ac765777bb3551e46ee",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "rol"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "residencias"
+                                                            },
+                                                            "descripcion": {
+                                                                "type": "string",
+                                                                "example": "Acceso a informacion vital para el proceso de residencias"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Crea un nuevo Rol.",
+                "description": "Crea un nuevo Rol.",
+                "operationId": "f73761f3232ec4cba90cf415662f35cc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "residencias"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Acceso a informacion vital para el proceso de residencias"
+                                    },
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Rol creado exitosamente.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "rol"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "residencias"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Acceso a informacion vital para el proceso de residencias"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud incorrecta.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Solicitud incorrecta."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Obtienes la informacion de un Rol especifico.",
+                "description": "Obten la informacion de un Rol especifico.",
+                "operationId": "c232c46a14cedfb72d6c4c13b8f8c21b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "rol"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "residencias"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Acceso a informacion vital para el proceso de residencias"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Actualiza un Rol existente.",
+                "description": "Actualiza un Rol existente.",
+                "operationId": "e0e21177d05f9f3200deac851fa691c9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "residencias"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Acceso a informacion vital para el proceso de residencias"
+                                    },
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rol actualizado exitosamente.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "rol"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "residencias"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Acceso a informacion vital para el proceso de residencias"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Solicitud incorrecta.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Solicitud incorrecta."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Elimina un Rol existente.",
+                "description": "Elimina un Rol existente.",
+                "operationId": "00c8cbf77f00b9c407253f593ccd8344",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Rol eliminado exitosamente.",
+                        "content": {
+                            "application/vnd.api+json": {}
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/scopes": {
             "get": {
                 "tags": [
@@ -1978,6 +2415,10 @@
         {
             "name": "Modelos",
             "description": "Información sobre los Modelos solicitados."
+        },
+        {
+            "name": "Roles",
+            "description": "Información sobre los Roles disponibles."
         },
         {
             "name": "Scopes",
