@@ -3,6 +3,7 @@
 namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
+use App\Http\Resources\CompartidoResource as Resource;
 
 class Compartido extends Model
 {
@@ -27,5 +28,9 @@ class Compartido extends Model
     public function uniqueIds(): array
     {
         return ['coid'];
+    }
+    protected static function getResourceClass()
+    {
+        return Resource::class;
     }
 }

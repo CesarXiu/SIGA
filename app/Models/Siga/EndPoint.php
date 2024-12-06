@@ -3,6 +3,7 @@
 namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
+use App\Http\Resources\EndPointResource as Resource;
 
 class EndPoint extends Model
 {
@@ -31,5 +32,9 @@ class EndPoint extends Model
     public function getRutas()
     {
         return $this->belongsTo(Rol::class, 'rol');
+    }
+    protected static function getResourceClass()
+    {
+        return Resource::class;
     }
 }

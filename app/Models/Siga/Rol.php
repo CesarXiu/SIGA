@@ -2,6 +2,7 @@
 
 namespace App\Models\Siga;
 use App\Models\BaseModel as Model;
+use App\Http\Resources\RolResource as Resource;
 
 class Rol extends Model
 {
@@ -34,5 +35,9 @@ class Rol extends Model
     public function permisos()
     {
         return $this->hasMany(Permiso::class, 'rol');
+    }
+    protected static function getResourceClass()
+    {
+        return Resource::class;
     }
 }

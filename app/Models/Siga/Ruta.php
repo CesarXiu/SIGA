@@ -3,6 +3,7 @@
 namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
+use App\Http\Resources\RutaResource as Resource;
 
 class Ruta extends Model
 {
@@ -39,5 +40,9 @@ class Ruta extends Model
     public function getScope()
     {
         return $this->belongsTo(Scope::class, 'scope');
+    }
+    protected static function getResourceClass()
+    {
+        return Resource::class;
     }
 }

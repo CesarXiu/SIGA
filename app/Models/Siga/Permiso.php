@@ -3,6 +3,7 @@
 namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
+use App\Http\Resources\PermisoResource as Resource;
 
 class Permiso extends Model
 {
@@ -36,5 +37,9 @@ class Permiso extends Model
     public function getScope()
     {
         return $this->belongsTo(Scope::class, 'scope');
+    }
+    protected static function getResourceClass()
+    {
+        return Resource::class;
     }
 }

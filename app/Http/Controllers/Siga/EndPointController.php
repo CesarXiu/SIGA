@@ -13,7 +13,7 @@ class EndPointController extends Controller
      */
     public function index()
     {
-        //
+        return EndPoint::all();
     }
 
     /**
@@ -22,7 +22,6 @@ class EndPointController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
-        //dd($data);
         return EndPoint::create($data);
     }
 

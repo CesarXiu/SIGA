@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Models\Siga\Rol;
+use App\Http\Resources\ConsumidorResource as Resource;
 
 
 class Consumidor extends Authenticatable
@@ -50,5 +51,9 @@ class Consumidor extends Authenticatable
     {
         //\Log::info('Entramos a la relacion');
         return $this->belongsTo(Rol::class, 'rol');
+    }
+    protected static function getResourceClass()
+    {
+        return Resource::class;
     }
 }

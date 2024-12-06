@@ -14,13 +14,14 @@ class EndPointResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $endpoint = $this->resource;
         return [
-            'id' => $this->enid,
+            'id' => $endpoint->enid,
             'type' => 'endPoint',
             'attributes' => [
-                'activo' => $this->activo,
-                'nombre' => $this->nombre,
-                'descripcion' => $this->descripcion,
+                'activo' => $endpoint->activo,
+                'nombre' => $endpoint->nombre,
+                'descripcion' => $endpoint->descripcion,
             ],
         ];
     }

@@ -28,12 +28,8 @@ class Scope extends Model
         return ['scid'];
     }
 
-    public function resource()
+    protected static function getResourceClass()
     {
-        return ["data" => Resource::make($this)];
-    }
-    public static function resourceCollection($data)
-    {
-        return ["data" => Resource::collection($data)];
+        return Resource::class;
     }
 }

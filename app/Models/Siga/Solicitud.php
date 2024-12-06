@@ -70,13 +70,8 @@ class Solicitud extends Model
     public function getModelos()
     {
         return $this->hasMany(Modelos::class, 'solicitud');
-    }
-    public static function resourceCollection($data)
+    }protected static function getResourceClass()
     {
-        return ["data" => Resource::collection($data)];
-    }
-    public function resource()
-    {
-        return ["data" => Resource::make($this)];
+        return Resource::class;
     }
 }
