@@ -15,6 +15,15 @@ use App\Models\Siga\Consumidor;
 
 class AuthController extends Controller
 {
+    public function me(Request $request){
+        $user = $request->user();
+        return response()->json(["data" => [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'rol' => $user->rol
+        ]]);
+    }
     public function login(Request $request){
         $validated = $request->validate([
             'email' => ['bail', 'required', 'exists:users,email'],
@@ -26,6 +35,16 @@ class AuthController extends Controller
         }
 
         return back()->withErrors(['error' => 'Invalid username or password']);
+    }
+    public function logout(){
+        // Obtén al usuario autenticado
+        $user = auth()->user();
+        // Obtener el token del usuario autenticado
+        $token = $user->token();
+        // Revocar el token
+        $token->revoke();
+        // Responde con un mensaje de éxito
+        return response()->json(['message' => $user], 200);
     }
 
     public function register(Request $request){

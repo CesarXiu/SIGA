@@ -3,6 +3,8 @@
 use App\Http\Controllers\Oauth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+//MIDDLEWARES
+use App\Http\Middleware\AddToTokenResponse;
 //CONTROLADORES
 use App\Http\Controllers\Siga\ScopeController;
 use App\Http\Controllers\Siga\RolController;
@@ -12,16 +14,11 @@ use App\Http\Controllers\Siga\EndPointController;
 use App\Http\Controllers\Siga\RutaController;
 use App\Http\Controllers\Siga\SolicitudController;
 use App\Http\Controllers\Siga\ModeloController;
-//MODELOS
-use App\Models\Siga\Consumidor;
-//EXCEPCIONES
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-// RUTAS DE PRUEBA //
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
-Route::get('/orders', [AuthController::class, "auth_consumer"])->middleware('client');
+// MODELOS
+// RUTAS DE AUTENTICACION //
+Route::get('/me', [AuthController::class,"me"])->middleware('auth:api');
+Route::get('/check', [AuthController::class, "auth_consumer"])->middleware('client');
+Route::get('/logout', [AuthController::class, "logout"])->middleware('auth:api');
 // RUTAS DE SIGA //
 Route::resource('scopes', ScopeController::class)->middleware('auth:api');
 Route::resource('roles', RolController::class)->middleware('auth:api');
@@ -30,4 +27,4 @@ Route::resource('permisos', PermisoController::class)->middleware('auth:api');
 Route::resource('endpoints', EndPointController::class)->middleware('auth:api');
 Route::resource('rutas', RutaController::class)->middleware('auth:api');
 Route::resource('solicitudes', SolicitudController::class)->middleware('auth:api');
-Route::resource('modelos', ModeloController::class);//->middleware('auth:api');
+Route::resource('modelos', ModeloController::class)->middleware('auth:api');
