@@ -19,6 +19,9 @@ use App\Http\Controllers\Siga\ModeloController;
 Route::get('/me', [AuthController::class,"me"])->middleware('auth:api');
 Route::get('/check', [AuthController::class, "auth_consumer"])->middleware('client');
 Route::get('/logout', [AuthController::class, "logout"])->middleware('auth:api');
+// BULK ROUTES //
+Route::post('permisos/scopes', [PermisoController::class, 'storeScopes'])->middleware('auth:api');
+Route::delete('permisos/scopes', [PermisoController::class, 'deleteScopes'])->middleware('auth:api');
 // RUTAS DE SIGA //
 Route::resource('scopes', ScopeController::class)->middleware('auth:api');
 Route::resource('roles', RolController::class)->middleware('auth:api');

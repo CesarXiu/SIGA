@@ -37,10 +37,6 @@ class Solicitud extends Model
             'correo' => 'string'
         ];
     }
-    //Relaciones permitidas para incluir en la consulta.
-    protected $allowIncluded = ['Modelos'];
-
-
     public function modelos($modelos){
         try{
             Modelos::insert($modelos);
@@ -65,6 +61,9 @@ class Solicitud extends Model
     {
         return ['soid'];
     }
+    
+    //Relaciones permitidas para incluir en la consulta.
+    protected $allowIncluded = ['Modelos','Propietario','Consumidor'];
     public function getPropietario()
     {
         return $this->belongsTo(User::class, 'propietario');
@@ -72,7 +71,12 @@ class Solicitud extends Model
     public function getModelos()
     {
         return $this->hasMany(Modelos::class, 'solicitud');
-    }protected static function getResourceClass()
+    }
+    public function getConsumidor()
+    {
+        return $this->belongsTo(Consumidor::class, 'consumidor');
+    }
+    protected static function getResourceClass()
     {
         return Resource::class;
     }

@@ -16,9 +16,12 @@ class ConsumidorResource extends JsonResource
     {
         $consumidor = $this->resource;
         if ($consumidor->relationLoaded('getApp')) {
-            $App = $consumidor->getApp->resource()['data'];
+            $App = ["App" => $consumidor->getApp->resource()['data']];
         }
-        $relationships = array_merge(["App" => $App] ?? []);
+        if ($consumidor->relationLoaded('getRol')) {
+            $Rol = ["Rol" => $consumidor->getRol->resource()['data']];
+        }
+        $relationships = array_merge($App ?? [], $Rol ?? []);
         return [ 
             'id' => $consumidor->coid,
             'type' => 'consumidor',

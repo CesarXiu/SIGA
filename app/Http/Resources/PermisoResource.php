@@ -15,6 +15,11 @@ class PermisoResource extends JsonResource
     public function toArray(Request $request): array
     {
         $permiso = $this->resource;
+        if ($permiso->relationLoaded('getScope')) {
+            $relation = $permiso->getScope;
+            $scopes = ["Scopes" => $relation->resource()['data']];
+        }
+        $relationships = array_merge($scopes ?? []);
         return [
             'id' => $permiso->peid,
             'type' => 'permiso',
@@ -24,6 +29,7 @@ class PermisoResource extends JsonResource
                 'rol' => $permiso->rol,
                 'scope' => $permiso->scope,
             ],
+            'relationships' => $relationships
         ];
     }
 }

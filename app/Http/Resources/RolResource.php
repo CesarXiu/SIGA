@@ -15,6 +15,13 @@ class RolResource extends JsonResource
     public function toArray(Request $request): array
     {
         $rol = $this->resource;
+        if ($rol->relationLoaded('getPermisos')) {
+            $relation = $rol->getPermisos;
+            $permisos = ["permisos" => $relation->map(function ($permiso) {
+                return $permiso->resource()['data'];
+            })];
+        }
+        $relationships = array_merge($permisos ?? []);
         return [
             'id' => $rol->roid,
             'type' => 'rol',
@@ -23,6 +30,7 @@ class RolResource extends JsonResource
                 'nombre' => $rol->nombre,
                 'descripcion' => $rol->descripcion,
             ],
+            'relationships' => $relationships
         ];
     }
 }

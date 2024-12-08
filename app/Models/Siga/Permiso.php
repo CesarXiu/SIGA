@@ -30,6 +30,7 @@ class Permiso extends Model
     {
         return ['peid'];
     }
+    protected $allowIncluded = ['Rol','Scope'];
     public function getRol()
     {
         return $this->belongsTo(Rol::class, 'rol');

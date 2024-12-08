@@ -86,7 +86,7 @@ class RolController extends Controller
  */
     public function index()
     {
-        return response()->json(Rol::resourceCollection(Rol::all()));
+        return response()->json(Rol::resourceCollection(Rol::Included()->get()));
     }
 /**
  * Crea un nuevo Rol.

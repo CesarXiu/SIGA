@@ -50,8 +50,8 @@ class Consumidor extends Authenticatable
     {
         return ['coid'];
     }
-    protected $allowIncluded = ['App'];
-    public function getRol(): BelongsTo
+    protected $allowIncluded = ['App', 'Rol'];
+    public function getRol()
     {
         return $this->belongsTo(Rol::class, 'rol');
     }

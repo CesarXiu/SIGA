@@ -24,7 +24,25 @@ class SolicitudResource extends JsonResource
                 return $modelo->resource()['data'];
             })];
         }
-        $relationships = array_merge($modelos ?? []);
+        if ($solicitud->relationLoaded('getPropietario')) {
+            $prop = $solicitud->getPropietario;
+            $propietario = ["propietario" => [
+                'id' => $prop->id,
+                'type' => 'user',
+                'attributes' => [
+                    'name' => $prop->name,
+                    'email' => $prop->email,
+                    'created_at' => Carbon::parse($prop->created_at)->diffForHumans()
+                ]
+            ]];
+        }
+        if ($solicitud->relationLoaded('getConsumidor')) {
+            $consumer = $solicitud->getConsumidor;
+            if($consumer){
+                $consumidor = ["consumidor" => $consumer->resource()['data']];
+            }
+        }
+        $relationships = array_merge($modelos ?? [], $propietario ?? [], $consumidor ?? []);
         return [
             'id' => $solicitud->soid,
             'type' => 'solicitud',

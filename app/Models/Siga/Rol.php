@@ -28,11 +28,12 @@ class Rol extends Model
     {
         return ['roid'];
     }
+    protected $allowIncluded = ['Consumidores','Permisos'];
     public function getConsumidores()
     {
         return $this->hasMany(Consumidor::class, 'rol');
     }
-    public function permisos()
+    public function getPermisos()
     {
         return $this->hasMany(Permiso::class, 'rol');
     }
