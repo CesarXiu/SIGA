@@ -37,14 +37,16 @@ class AuthController extends Controller
         return back()->withErrors(['error' => 'Invalid username or password']);
     }
     public function logout(){
-        // Obtén al usuario autenticado
         $user = auth()->user();
-        // Obtener el token del usuario autenticado
         $token = $user->token();
-        // Revocar el token
         $token->revoke();
-        // Responde con un mensaje de éxito
-        return response()->json(['message' => $user], 200);
+        // Invalidar la sesión
+        session()->invalidate();
+
+        // Eliminar las cookies
+        $cookie = cookie()->forget('XSRF-TOKEN');
+        $cookie2 = cookie()->forget('laravel_session');
+        return response()->json(['message' => $user], 200)->withCookie($cookie)->withCookie($cookie2);;
     }
 
     public function register(Request $request){
