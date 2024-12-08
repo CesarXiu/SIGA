@@ -23,7 +23,8 @@ class ScopeRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string',
-            'activo' => 'boolean'
+            'activo' => 'boolean',
+            'endpoint' => 'required|string|exists:endpoints,enid'
         ];
     }
 }

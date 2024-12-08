@@ -29,11 +29,16 @@ class EndPoint extends Model
     {
         return ['enid'];
     }
-    protected $allowIncluded = ['Rutas'];
+    protected $allowIncluded = ['Rutas', 'Scopes'];
     public function getRutas()
     {
         return $this->hasMany(Ruta::class, 'endpoint');
     }
+    public function getScopes()
+    {
+        return $this->hasMany(Scope::class, 'endpoint');
+    }
+    
     protected static function getResourceClass()
     {
         return Resource::class;

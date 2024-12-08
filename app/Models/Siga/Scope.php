@@ -14,7 +14,8 @@ class Scope extends Model
     ];
     protected $fillable = [
         'nombre', 
-        'activo'
+        'activo',
+        'endpoint'
     ];
     protected function casts(): array
     {

@@ -21,7 +21,13 @@ class EndPointResource extends JsonResource
                 return $ruta->resource()['data'];
             })];
         }
-        $relationships = array_merge($rutas ?? [ 'a' => 'b' ]);
+        if ($endpoint->relationLoaded('getScopes')) {
+            $relation = $endpoint->getScopes;
+            $scopes = ["scopes" => $relation->map(function ($scope) {
+                return $scope->resource()['data'];
+            })];
+        }
+        $relationships = array_merge($rutas ?? [], $scopes ?? []);
         return [
             'id' => $endpoint->enid,
             'type' => 'endPoint',

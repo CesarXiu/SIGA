@@ -20,6 +20,7 @@ class ScopeResource extends JsonResource
             'attributes' => [
                 'activo' => $this->activo,
                 'nombre' => $this->nombre,
+                'endpoint' => $this->endpoint,
             ],
         ];
     }
