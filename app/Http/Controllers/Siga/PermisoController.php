@@ -22,7 +22,6 @@ class PermisoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
-        //dd($data);
         return Permiso::create($data);
     }
 

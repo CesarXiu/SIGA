@@ -8,12 +8,13 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Models\Siga\Rol;
 use App\Http\Resources\ConsumidorResource as Resource;
+use App\Http\Traits\UtilTraits;
 
 
 class Consumidor extends Authenticatable
 {
     //AUTEHNTICATABLE
-        use HasUuids,HasApiTokens;
+        use HasUuids,HasApiTokens, UtilTraits;
         public $incrementing = false;
         public $timestamps = false;
         protected $keyType = 'string';

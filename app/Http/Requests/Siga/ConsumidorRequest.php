@@ -25,7 +25,7 @@ class ConsumidorRequest extends FormRequest
             'nombre' => 'required|string',
             'email' => 'required|email',
             'activo' => 'boolean',
-            'appid' => 'required|string|regex:/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/|exists:oauth_clients,id',
+            'rol' => 'required|string|exists:roles,roid',
             'propietario' => 'required|string|exists:users,id',
         ];
     }
