@@ -14,7 +14,7 @@ class ConsumidorController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Consumidor::resourceCollection(Consumidor::all()));
     }
 
     /**
@@ -43,24 +43,31 @@ class ConsumidorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Consumidor $consumidor)
+    public function show($id)
     {
-        //
+        $consumidor = Consumidor::findOrFail($id);
+        return response()->json($consumidor->resource());
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Consumidor $consumidor)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->validated();
+        $consumidor = Consumidor::findOrFail($id);
+        $consumidor->update($data);
+        return response()->json($consumidor->resource());
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Consumidor $consumidor)
+    public function destroy( $id)
     {
-        //
+        $consumidor = Consumidor::findOrFail($id);
+        $consumidor->delete();
+        ClientController::deleteClient($consumidor['appid']);
+        return response()->json($consumidor->resource());
     }
 }

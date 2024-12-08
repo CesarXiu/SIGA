@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Models\Siga\Rol;
 use App\Http\Resources\ConsumidorResource as Resource;
 use App\Http\Traits\UtilTraits;
+use Laravel\Passport\ClientRepository;
 
 
 class Consumidor extends Authenticatable
@@ -50,8 +51,12 @@ class Consumidor extends Authenticatable
 
     public function getRol(): BelongsTo
     {
-        //\Log::info('Entramos a la relacion');
         return $this->belongsTo(Rol::class, 'rol');
+    }
+    public function getApp(){
+        $clientRepository = new ClientRepository();
+        $client = $clientRepository->find($this->appid);
+        return $client;
     }
     protected static function getResourceClass()
     {
