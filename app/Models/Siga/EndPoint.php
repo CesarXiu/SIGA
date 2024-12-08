@@ -29,9 +29,10 @@ class EndPoint extends Model
     {
         return ['enid'];
     }
+    protected $allowIncluded = ['Rutas'];
     public function getRutas()
     {
-        return $this->belongsTo(Rol::class, 'rol');
+        return $this->hasMany(Ruta::class, 'endpoint');
     }
     protected static function getResourceClass()
     {

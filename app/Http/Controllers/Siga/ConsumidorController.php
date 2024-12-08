@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siga\Consumidor;
 use App\Http\Requests\Siga\ConsumidorRequest as Request;
 use App\Http\Controllers\ClientController;
+use App\Models\Passport\Client;
 
 class ConsumidorController extends Controller
 {
@@ -14,7 +15,8 @@ class ConsumidorController extends Controller
      */
     public function index()
     {
-        return response()->json(Consumidor::resourceCollection(Consumidor::all()));
+        //return Client::all();
+        return response()->json(Consumidor::resourceCollection(Consumidor::Included()->get()));
     }
 
     /**

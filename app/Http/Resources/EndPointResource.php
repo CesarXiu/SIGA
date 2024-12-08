@@ -15,6 +15,13 @@ class EndPointResource extends JsonResource
     public function toArray(Request $request): array
     {
         $endpoint = $this->resource;
+        if ($endpoint->relationLoaded('getRutas')) {
+            $relation = $endpoint->getRutas;
+            $rutas = ["rutas" => $relation->map(function ($ruta) {
+                return $ruta->resource()['data'];
+            })];
+        }
+        $relationships = array_merge($rutas ?? [ 'a' => 'b' ]);
         return [
             'id' => $endpoint->enid,
             'type' => 'endPoint',
@@ -23,6 +30,7 @@ class EndPointResource extends JsonResource
                 'nombre' => $endpoint->nombre,
                 'descripcion' => $endpoint->descripcion,
             ],
+            'relationships' => $relationships
         ];
     }
 }

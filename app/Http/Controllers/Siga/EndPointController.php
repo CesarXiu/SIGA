@@ -83,7 +83,7 @@ class EndPointController extends Controller
  */
     public function index()
     {
-        return response()->json(EndPoint::resourceCollection(EndPoint::all()));
+        return response()->json(EndPoint::resourceCollection(EndPoint::Included()->get()));
     }
 /**
  * Crea un nuevo EndPoint.

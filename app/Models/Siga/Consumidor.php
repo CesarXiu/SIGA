@@ -7,16 +7,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Models\Siga\Rol;
+use App\Models\Passport\Client;
 use App\Http\Resources\ConsumidorResource as Resource;
 use App\Http\Traits\UtilTraits;
+use App\Http\Traits\ApiTraits;
 use Laravel\Passport\ClientRepository;
 
 
 class Consumidor extends Authenticatable
 {
     //AUTEHNTICATABLE
-        use HasUuids,HasApiTokens, UtilTraits;
-        public $incrementing = false;
+        use HasUuids,HasApiTokens, UtilTraits, ApiTraits;
+        public $incrementing = false; 
         public $timestamps = false;
         protected $keyType = 'string';
     //AUTEHNTICATABLE
@@ -48,15 +50,13 @@ class Consumidor extends Authenticatable
     {
         return ['coid'];
     }
-
+    protected $allowIncluded = ['App'];
     public function getRol(): BelongsTo
     {
         return $this->belongsTo(Rol::class, 'rol');
     }
     public function getApp(){
-        $clientRepository = new ClientRepository();
-        $client = $clientRepository->find($this->appid);
-        return $client;
+        return $this->belongsTo(Client::class, 'appid');
     }
     protected static function getResourceClass()
     {

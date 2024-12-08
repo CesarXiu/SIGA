@@ -14,17 +14,23 @@ class ConsumidorResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'id' => $this->coid,
+        $consumidor = $this->resource;
+        if ($consumidor->relationLoaded('getApp')) {
+            $App = $consumidor->getApp->resource()['data'];
+        }
+        $relationships = array_merge(["App" => $App] ?? []);
+        return [ 
+            'id' => $consumidor->coid,
             'type' => 'consumidor',
             'attributes' => [
-                'nombre' => $this->nombre,
-                'email' => $this->email,
-                'activo' => $this->activo,
-                'appid' => $this->appid,
-                'rol' => $this->rol,
-                'propietario' => $this->propietario,
+                'nombre' => $consumidor->nombre,
+                'email' => $consumidor->email,
+                'activo' => $consumidor->activo,
+                'appid' => $consumidor->appid,
+                'rol' => $consumidor->rol,
+                'propietario' => $consumidor->propietario,
             ],
+            'relationships' => $relationships
         ];
     }
 }
