@@ -25,7 +25,6 @@ class SolicitudRequest extends FormRequest
             'descripcion' => 'required|string',
             'nombre' => 'required|string',
             'correo' => 'required|email',
-            'resuelto' => 'boolean',
             'archivos' => 'required|array',
             'archivos.*.nombre' => 'required|string',
             'archivos.*.descripcion' => 'required|string',
