@@ -30,6 +30,7 @@ class EndPoint extends Model
         return ['enid'];
     }
     protected $allowIncluded = ['Rutas', 'Scopes'];
+    protected $allowFilters = ['nombre', 'descripcion'];
     public function getRutas()
     {
         return $this->hasMany(Ruta::class, 'endpoint');

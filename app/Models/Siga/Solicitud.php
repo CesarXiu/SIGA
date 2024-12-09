@@ -63,7 +63,7 @@ class Solicitud extends Model
     }
     
     //Relaciones permitidas para incluir en la consulta.
-    protected $allowIncluded = ['Modelos','Propietario','Consumidor'];
+    protected $allowIncluded = ['Modelos','Propietario','Consumidor','Consumidor.getRol'];
     public function getPropietario()
     {
         return $this->belongsTo(User::class, 'propietario');
