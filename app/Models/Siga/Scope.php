@@ -28,6 +28,9 @@ class Scope extends Model
     {
         return ['scid'];
     }
+    public function getEndPoint(){
+        return $this->belongsTo(EndPoint::class, 'endpoint');
+    }
 
     protected static function getResourceClass()
     {

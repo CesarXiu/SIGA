@@ -26,15 +26,7 @@ class SolicitudResource extends JsonResource
         }
         if ($solicitud->relationLoaded('getPropietario')) {
             $prop = $solicitud->getPropietario;
-            $propietario = ["propietario" => [
-                'id' => $prop->id,
-                'type' => 'user',
-                'attributes' => [
-                    'name' => $prop->name,
-                    'email' => $prop->email,
-                    'created_at' => Carbon::parse($prop->created_at)->diffForHumans()
-                ]
-            ]];
+            $propietario = ["propietario" => $prop->resource()['data']];
         }
         if ($solicitud->relationLoaded('getConsumidor')) {
             $consumer = $solicitud->getConsumidor;

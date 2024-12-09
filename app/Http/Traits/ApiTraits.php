@@ -28,18 +28,20 @@ trait ApiTraits{
         //Se obtienen las relaciones a incluir, deben de estar separadas por comas.
         $relations = explode(',', request('included'));
         //Se hace un arreglo con las relaciones que desea cargar.
-        $relations = array_map(function($relation) {
-            $relation = 'get'.$relation;
-            return $relation;
-        }, $relations);
         //Se filtran las relaciones que no estan permitidas.
         $allowIncluded = collect($this->allowIncluded);
+        //dd($allowIncluded);
         foreach ($relations as $key => $relation) {
-            if($allowIncluded->contains($relation)){
+            if(!$allowIncluded->contains($relation)){
+                \Log::info("Se elimina la relacion: ".$relation." que no esta permitida.");
                 //Se elimina la relacion que no esta permitida.
                 unset($relations[$key]);
             }
         }
+        $relations = array_map(function($relation) {
+            $relation = 'get'.$relation;
+            return $relation;
+        }, $relations);
         //Se cargan las relaciones en la consulta.
         $query->with($relations);
     }

@@ -14,14 +14,21 @@ class ScopeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $scope = $this->resource;
+        if ($scope->relationLoaded('getEndPoint')) {
+            $end = $scope->getEndPoint;
+            $endpoint = ["EndPoint" => $end->resource()['data']];
+        }
+        $relationships = array_merge($endpoint ?? []);
         return [
-            'id' => $this->scid,
+            'id' => $scope->scid,
             'type' => 'scope',
             'attributes' => [
-                'activo' => $this->activo,
-                'nombre' => $this->nombre,
-                'endpoint' => $this->endpoint,
+                'activo' => $scope->activo,
+                'nombre' => $scope->nombre,
+                'endpoint' => $scope->endpoint,
             ],
+            'relationships' => $relationships
         ];
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Resources\ConsumidorResource as Resource;
 use App\Http\Traits\UtilTraits;
 use App\Http\Traits\ApiTraits;
 use Laravel\Passport\ClientRepository;
+use App\Models\User;
 
 
 class Consumidor extends Authenticatable
@@ -50,13 +51,16 @@ class Consumidor extends Authenticatable
     {
         return ['coid'];
     }
-    protected $allowIncluded = ['App', 'Rol'];
+    protected $allowIncluded = ['App', 'Rol','Propietario','Rol.getPermisos','Rol.getPermisos.getScope','Rol.getPermisos.getScope.getEndPoint','Rol.getPermisos.getScope.getEndPoint.getRutas'];
     public function getRol()
     {
         return $this->belongsTo(Rol::class, 'rol');
     }
     public function getApp(){
         return $this->belongsTo(Client::class, 'appid');
+    }
+    public function getPropietario(){
+        return $this->belongsTo(User::class, 'propietario');
     }
     protected static function getResourceClass()
     {
