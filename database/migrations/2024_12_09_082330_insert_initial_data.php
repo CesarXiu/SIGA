@@ -16,41 +16,31 @@ return new class extends Migration
                 'enid' => '9da7dcef-e7d5-4147-9b23-db00a55f7846',
                 'nombre' => 'Alumnos',
                 'descripcion' => 'Informacion de los alumnos',
-                'activo' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'activo' => true
             ],
             [
                 'enid' => '9da7dcfd-b6b3-4251-8c1c-99055ec8fa64',
                 'nombre' => 'Profesores',
                 'descripcion' => 'Informacion de los profesores',
-                'activo' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'activo' => true
             ],
             [
                 'enid' => '9dac0844-1301-4fff-9cb8-ac4d757f6a04',
                 'nombre' => 'Carreras',
                 'descripcion' => 'Informacion de las carreras',
-                'activo' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'activo' => true
             ],
             [
                 'enid' => '9dac08aa-91c7-4985-b841-76cdbdce6c16',
                 'nombre' => 'Periodos',
                 'descripcion' => 'Informacion de los periodos',
-                'activo' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'activo' => true
             ],
             [
                 'enid' => '9dac0993-8af2-4a36-918e-e4b1f45f18dc',
                 'nombre' => 'Kardex',
                 'descripcion' => 'Informacion del Kardex del alumno',
-                'activo' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'activo' => true
             ],
         ];
 

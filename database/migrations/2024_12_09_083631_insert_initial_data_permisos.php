@@ -17,27 +17,21 @@ return new class extends Migration
                 'activo' => true,
                 'vista' => 'basic',
                 'rol' => '9d4b5f15-c250-4ac0-9a41-f8c9c2155d05',
-                'scope' => '9d4b5b4c-f514-46d3-bec0-e91228923304',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9d4b5b4c-f514-46d3-bec0-e91228923304'
             ],
             [
                 'peid' => '9dae910a-bcc3-4abf-8f71-9b0754308962',
                 'activo' => true,
                 'vista' => 'basic',
                 'rol' => '9d4b5f15-c250-4ac0-9a41-f8c9c2155d05',
-                'scope' => '9dac0cab-5f5b-4063-b385-7425a4287b7c',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9dac0cab-5f5b-4063-b385-7425a4287b7c'
             ],
             [
                 'peid' => '9dae97a7-5ddf-4cb6-8b0a-242c2766152a',
                 'activo' => true,
                 'vista' => 'basic',
                 'rol' => '9d4b5f15-c250-4ac0-9a41-f8c9c2155d05',
-                'scope' => '9dac0cdc-6a64-42a2-9c57-44a47e8c6e14',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9dac0cdc-6a64-42a2-9c57-44a47e8c6e14'
             ],
         ];
 

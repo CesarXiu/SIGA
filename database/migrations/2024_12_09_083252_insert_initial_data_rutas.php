@@ -19,9 +19,7 @@ return new class extends Migration
                 'ruta' => '/api/alumnos',
                 'activo' => true,
                 'endpoint' => '9da7dcef-e7d5-4147-9b23-db00a55f7846',
-                'scope' => '9d4b5b4c-f514-46d3-bec0-e91228923304',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9d4b5b4c-f514-46d3-bec0-e91228923304'
             ],
             [
                 'ruid' => '9dac0c69-f8a6-4593-9f0d-a8b119aae405',
@@ -30,9 +28,7 @@ return new class extends Migration
                 'ruta' => '/api/alumnos/{alumno}',
                 'activo' => true,
                 'endpoint' => '9da7dcef-e7d5-4147-9b23-db00a55f7846',
-                'scope' => '9d4b5b4c-f514-46d3-bec0-e91228923304',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9d4b5b4c-f514-46d3-bec0-e91228923304'
             ],
             [
                 'ruid' => '9dac0dd8-b7fc-4e7c-affa-557926efcdf8',
@@ -41,9 +37,7 @@ return new class extends Migration
                 'ruta' => '/api/profesores',
                 'activo' => true,
                 'endpoint' => '9da7dcfd-b6b3-4251-8c1c-99055ec8fa64',
-                'scope' => '9dac0cab-5f5b-4063-b385-7425a4287b7c',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9dac0cab-5f5b-4063-b385-7425a4287b7c'
             ],
             [
                 'ruid' => '9dac0e40-7d90-41fe-9c7a-a9123d9c1b0c',
@@ -52,9 +46,7 @@ return new class extends Migration
                 'ruta' => '/api/carreras',
                 'activo' => true,
                 'endpoint' => '9dac0844-1301-4fff-9cb8-ac4d757f6a04',
-                'scope' => '9dac0cc2-978c-4ac5-9d22-bbb7d063c3c9',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9dac0cc2-978c-4ac5-9d22-bbb7d063c3c9'
             ],
             [
                 'ruid' => '9dac0e90-b310-4ff3-a65d-971c58e948f2',
@@ -63,9 +55,7 @@ return new class extends Migration
                 'ruta' => '/api/kardex/{kardex}',
                 'activo' => true,
                 'endpoint' => '9dac0993-8af2-4a36-918e-e4b1f45f18dc',
-                'scope' => '9dac0ccf-dd47-4e79-9851-2e042a1c0b78',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9dac0ccf-dd47-4e79-9851-2e042a1c0b78'
             ],
             [
                 'ruid' => '9dac0ee6-f603-4185-ba5b-f8e9d6f2e0c7',
@@ -74,9 +64,7 @@ return new class extends Migration
                 'ruta' => '/api/periodos',
                 'activo' => true,
                 'endpoint' => '9dac08aa-91c7-4985-b841-76cdbdce6c16',
-                'scope' => '9dac0cdc-6a64-42a2-9c57-44a47e8c6e14',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'scope' => '9dac0cdc-6a64-42a2-9c57-44a47e8c6e14'
             ],
         ];
 

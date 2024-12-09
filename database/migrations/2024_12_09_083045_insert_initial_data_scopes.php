@@ -17,40 +17,30 @@ return new class extends Migration
                 'nombre' => 'alumno.get',
                 'activo' => true,
                 'endpoint' => '9da7dcef-e7d5-4147-9b23-db00a55f7846',
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
                 'scid' => '9dac0cab-5f5b-4063-b385-7425a4287b7c',
                 'nombre' => 'profesor.get',
                 'activo' => true,
-                'endpoint' => '9da7dcfd-b6b3-4251-8c1c-99055ec8fa64',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'endpoint' => '9da7dcfd-b6b3-4251-8c1c-99055ec8fa64'
             ],
             [
                 'scid' => '9dac0cc2-978c-4ac5-9d22-bbb7d063c3c9',
                 'nombre' => 'carrera.get',
                 'activo' => true,
-                'endpoint' => '9dac0844-1301-4fff-9cb8-ac4d757f6a04',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'endpoint' => '9dac0844-1301-4fff-9cb8-ac4d757f6a04'
             ],
             [
                 'scid' => '9dac0ccf-dd47-4e79-9851-2e042a1c0b78',
                 'nombre' => 'kardex.get',
                 'activo' => true,
-                'endpoint' => '9dac0993-8af2-4a36-918e-e4b1f45f18dc',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'endpoint' => '9dac0993-8af2-4a36-918e-e4b1f45f18dc'
             ],
             [
                 'scid' => '9dac0cdc-6a64-42a2-9c57-44a47e8c6e14',
                 'nombre' => 'periodo.get',
                 'activo' => true,
-                'endpoint' => '9dac08aa-91c7-4985-b841-76cdbdce6c16',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'endpoint' => '9dac08aa-91c7-4985-b841-76cdbdce6c16'
             ],
         ];
 

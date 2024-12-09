@@ -16,9 +16,7 @@ return new class extends Migration
                 'roid' => '9d4b5f15-c250-4ac0-9a41-f8c9c2155d05',
                 'nombre' => 'residencias',
                 'descripcion' => 'Acceso a informacion vital para el proceso de residencias',
-                'activo' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'activo' => true
             ],
         ];
 
