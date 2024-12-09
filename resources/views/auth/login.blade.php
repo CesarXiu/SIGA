@@ -4,7 +4,7 @@
 <div class="h-screen w-full bg-gradient-to-b from-white to-purple-300 flex flex-col items-center justify-start">
         <div class="flex flex-col items-center">
             <div class="mb-8">
-                <img src="/Logo.png" alt="Imagen" style="width: auto; height: 80%;">
+                <img src="Logo.png" alt="Imagen" style="width: auto; height: 80%;">
             </div>
         </div>
         <div class="w-full max-w-md bg-beige p-6 rounded-lg shadow-md mx-auto bg-gray-100">
