@@ -27,6 +27,7 @@ class ConsumidorRequest extends FormRequest
             'activo' => 'boolean',
             'rol' => 'required|string|exists:roles,roid',
             'propietario' => 'required|string|exists:users,id',
+            'solicitud' => 'string|exists:solicitudes,soid',
         ];
     }
 }

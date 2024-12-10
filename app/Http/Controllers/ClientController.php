@@ -18,7 +18,10 @@ class ClientController extends Controller
         );
         \DB::table('oauth_clients')
             ->where('id', $client->id)
-            ->update(['user_id' => $user]);
+            ->update([
+            'user_id' => $user,
+            'name' => $name
+            ]);
         return [
             'client_id' => $client->id,
             'client_secret' => $client->secret,

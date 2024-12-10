@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siga\Consumidor;
 use App\Http\Requests\Siga\ConsumidorRequest as Request;
 use App\Http\Controllers\ClientController;
-use App\Models\Passport\Client;
+use App\Models\Siga\Solicitud;
 
 class ConsumidorController extends Controller
 {
@@ -29,6 +29,12 @@ class ConsumidorController extends Controller
         $data['appid'] = $newClient['client_id'];
         try {
             $consumidor = Consumidor::create($data);
+            if($data['solicitud']){
+                $solicitud = Solicitud::findOrFail($data['solicitud']);
+                $solicitud->consumidor = $consumidor->coid;
+                $solicitud->resuelto = true;
+                $solicitud->save();
+            }
             return response()->json([
             "data" => [
                 "consumidor" => $consumidor->resource()['data'],
