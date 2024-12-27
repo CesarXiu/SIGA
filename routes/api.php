@@ -28,6 +28,6 @@ Route::apiResource('roles', RolController::class)->middleware('auth:api');
 Route::apiResource('consumidores', ConsumidorController::class)->middleware('auth:api');
 Route::apiResource('permisos', PermisoController::class)->middleware('auth:api');
 Route::apiResource('endpoints', EndPointController::class)->middleware('auth:api');
-Route::apiResource('rutas', RutaController::class)->middleware('auth:api');
+Route::apiResource('rutas', RutaController::class);//->middleware('auth:api');
 Route::apiResource('solicitudes', SolicitudController::class)->middleware('auth:api');
 Route::apiResource('modelos', ModeloController::class)->middleware('auth:api');

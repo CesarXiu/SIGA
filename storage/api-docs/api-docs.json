@@ -1851,6 +1851,481 @@
                 ]
             }
         },
+        "/api/rutas": {
+            "get": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Obtienes la informacion de las Rutas.",
+                "description": "Obten la informacion de todas las rutas.",
+                "operationId": "c523f28a512342cd7b88a1b7fa35f6ff",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9da77c25-1bd1-4672-a9be-656f60615a39"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "ruta"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "metodo": {
+                                                                "type": "string",
+                                                                "example": "POST"
+                                                            },
+                                                            "descripcion": {
+                                                                "type": "string",
+                                                                "example": "Endpoint con informacion de Alumnos"
+                                                            },
+                                                            "ruta": {
+                                                                "type": "string",
+                                                                "example": "/alumnos"
+                                                            },
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "endpoint": {
+                                                                "type": "string",
+                                                                "example": "9da77b14-9952-4f11-945c-b40370f82d0a"
+                                                            },
+                                                            "scope": {
+                                                                "type": "string",
+                                                                "example": "9da77a10-48ca-41f9-af6c-4422f0f6ce31"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Guarda una nueva Ruta.",
+                "description": "Guarda una nueva ruta.",
+                "operationId": "844d7e0b4868cd00e7a71619bbd7c8f3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Endpoint con informacion de Alumnos"
+                                    },
+                                    "metodo": {
+                                        "type": "string",
+                                        "enum": [
+                                            "GET",
+                                            "POST",
+                                            "PUT",
+                                            "DELETE"
+                                        ],
+                                        "example": "POST"
+                                    },
+                                    "ruta": {
+                                        "type": "string",
+                                        "pattern": "^\\/[a-z0-9\\-\\/\\{\\}]+$",
+                                        "example": "/alumnos"
+                                    },
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "endpoint": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9da77b14-9952-4f11-945c-b40370f82d0a"
+                                    },
+                                    "scope": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9da77a10-48ca-41f9-af6c-4422f0f6ce31"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ruta creada exitosamente.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da77c25-1bd1-4672-a9be-656f60615a39"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "ruta"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "metodo": {
+                                                            "type": "string",
+                                                            "example": "POST"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Endpoint con informacion de Alumnos"
+                                                        },
+                                                        "ruta": {
+                                                            "type": "string",
+                                                            "example": "/alumnos"
+                                                        },
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "endpoint": {
+                                                            "type": "string",
+                                                            "example": "9da77b14-9952-4f11-945c-b40370f82d0a"
+                                                        },
+                                                        "scope": {
+                                                            "type": "string",
+                                                            "example": "9da77a10-48ca-41f9-af6c-4422f0f6ce31"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/rutas/{id}": {
+            "get": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Obtienes la informacion de una Ruta.",
+                "description": "Obten la informacion de una ruta.",
+                "operationId": "5ab46d0415df682826c86d9f208f4cc2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9da77c25-1bd1-4672-a9be-656f60615a39"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da77c25-1bd1-4672-a9be-656f60615a39"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "ruta"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "metodo": {
+                                                            "type": "string",
+                                                            "example": "POST"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Endpoint con informacion de Alumnos"
+                                                        },
+                                                        "ruta": {
+                                                            "type": "string",
+                                                            "example": "/alumnos"
+                                                        },
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "endpoint": {
+                                                            "type": "string",
+                                                            "example": "9da77b14-9952-4f11-945c-b40370f82d0a"
+                                                        },
+                                                        "scope": {
+                                                            "type": "string",
+                                                            "example": "9da77a10-48ca-41f9-af6c-4422f0f6ce31"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Rutas"
+                ],
+                "summary": "Modifica una ruta existente.",
+                "description": "Modifica informacion de una ruta.",
+                "operationId": "b9917ddda7ca31be40cd9869af013bb2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9da77c25-1bd1-4672-a9be-656f60615a39"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Endpoint con informacion de Alumnos"
+                                    },
+                                    "metodo": {
+                                        "type": "string",
+                                        "enum": [
+                                            "GET",
+                                            "POST",
+                                            "PUT",
+                                            "DELETE"
+                                        ],
+                                        "example": "POST"
+                                    },
+                                    "ruta": {
+                                        "type": "string",
+                                        "pattern": "^\\/[a-z0-9\\-\\/\\{\\}]+$",
+                                        "example": "/alumnos"
+                                    },
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "endpoint": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9da77b14-9952-4f11-945c-b40370f82d0a"
+                                    },
+                                    "scope": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9da77a10-48ca-41f9-af6c-4422f0f6ce31"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ruta creada exitosamente.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da77c25-1bd1-4672-a9be-656f60615a39"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "ruta"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "metodo": {
+                                                            "type": "string",
+                                                            "example": "POST"
+                                                        },
+                                                        "descripcion": {
+                                                            "type": "string",
+                                                            "example": "Endpoint con informacion de Alumnos"
+                                                        },
+                                                        "ruta": {
+                                                            "type": "string",
+                                                            "example": "/alumnos"
+                                                        },
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "endpoint": {
+                                                            "type": "string",
+                                                            "example": "9da77b14-9952-4f11-945c-b40370f82d0a"
+                                                        },
+                                                        "scope": {
+                                                            "type": "string",
+                                                            "example": "9da77a10-48ca-41f9-af6c-4422f0f6ce31"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/scopes": {
             "get": {
                 "tags": [
@@ -2823,6 +3298,10 @@
         {
             "name": "Roles",
             "description": "Información sobre los Roles disponibles."
+        },
+        {
+            "name": "Rutas",
+            "description": "Información sobre las Rutas disponibles."
         },
         {
             "name": "Scopes",
