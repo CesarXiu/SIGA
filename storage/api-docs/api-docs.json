@@ -7,6 +7,189 @@
     },
     "paths": {
         "/api": {},
+        "/api/me": {
+            "get": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Obtener mi informacion.",
+                "description": "Obtener informacion del propietario del token.",
+                "operationId": "b02cdd146ccba9f18ac3ca44b8e5735d",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9da77c25-1bd1-4672-a9be-656f60615a39"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "johndoe@example.com"
+                                                },
+                                                "rol": {
+                                                    "type": "string",
+                                                    "example": "admin"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "get": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Obtener mi informacion.",
+                "description": "Obtener informacion del propietario del token.",
+                "operationId": "bf22563b9716d530fa75da690cf0eda6",
+                "responses": {
+                    "200": {
+                        "description": "Sesion cerrada correctamente.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "message": "Token y Sesion removidos correctamente"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/check": {
+            "get": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "Validar el acceso de un usuario a una ruta.",
+                "description": "Validar el acceso del usuario.",
+                "operationId": "1b428d9a67a7225ca6aac16626850d5f",
+                "parameters": [
+                    {
+                        "name": "ruta",
+                        "in": "query",
+                        "description": "Nombre de la ruta a validar.",
+                        "required": true,
+                        "example": "/api/alumnos"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sesion cerrada correctamente.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "Consumidor": "L20390000@chetumal.tecnm.mx"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Access denied: Permiso necesario no encontrado"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/consumidores": {
             "get": {
                 "tags": [
@@ -3283,6 +3466,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Autenticación",
+            "description": "Rutas utilizadas para la autenticacion."
+        },
         {
             "name": "Consumidores",
             "description": "Información sobre los usuarios con permisos para consumir la API."
