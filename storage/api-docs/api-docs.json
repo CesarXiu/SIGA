@@ -7,6 +7,406 @@
     },
     "paths": {
         "/api": {},
+        "/api/consumidores": {
+            "get": {
+                "tags": [
+                    "Consumidores"
+                ],
+                "summary": "Obtienes la informacion de todas las cuentas de consumidor.",
+                "description": "Obten la informacion de todos los consumidores.",
+                "operationId": "d4a70a985e8411fbfef25d0aca7f30fe",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "consumidor"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "nombre": {
+                                                                "type": "string",
+                                                                "example": "residencias"
+                                                            },
+                                                            "email": {
+                                                                "type": "string",
+                                                                "example": "mapaches@residencias.com"
+                                                            },
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "appid": {
+                                                                "type": "string",
+                                                                "example": "9d4b687f-fc63-4054-bf3b-b159f6c124ab"
+                                                            },
+                                                            "rol": {
+                                                                "type": "string",
+                                                                "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                            },
+                                                            "propietario": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "relationships": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/consumidores/{id}": {
+            "get": {
+                "tags": [
+                    "Consumidores"
+                ],
+                "summary": "Obtienes la informacion de una cuenta de consumidor.",
+                "description": "Obten la informacion de todos los consumidores.",
+                "operationId": "b57e069c041d52fbf2e081fdcc48f9a9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "consumidor"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "residencias"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "mapaches@residencias.com"
+                                                        },
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "appid": {
+                                                            "type": "string",
+                                                            "example": "9d4b687f-fc63-4054-bf3b-b159f6c124ab"
+                                                        },
+                                                        "rol": {
+                                                            "type": "string",
+                                                            "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                        },
+                                                        "propietario": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relationships": {
+                                                    "type": "array",
+                                                    "items": {}
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Consumidores"
+                ],
+                "summary": "Actualiza la informacion de una cuenta de consumidor.",
+                "description": "Actualizar la informacion de un consumidor.",
+                "operationId": "ff35a35742e3a928e9d74421e62c3401",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "residencias"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "mapaches@residencias.com"
+                                    },
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "rol": {
+                                        "type": "string",
+                                        "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                    },
+                                    "propietario": {
+                                        "type": "string",
+                                        "example": "2"
+                                    },
+                                    "solicitud": {
+                                        "type": "string",
+                                        "example": "9d4b687f-fc63-4054-bf3b-b159f6c124ab"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "consumidor"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "nombre": {
+                                                            "type": "string",
+                                                            "example": "residencias"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "mapaches@residencias.com"
+                                                        },
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "appid": {
+                                                            "type": "string",
+                                                            "example": "9d4b687f-fc63-4054-bf3b-b159f6c124ab"
+                                                        },
+                                                        "rol": {
+                                                            "type": "string",
+                                                            "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                        },
+                                                        "propietario": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relationships": {
+                                                    "type": "array",
+                                                    "items": {}
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Consumidores"
+                ],
+                "summary": "Obtienes la informacion de una cuenta de consumidor.",
+                "description": "Obten la informacion de todos los consumidores.",
+                "operationId": "c23cd9bdd775ac62cbda78d891dee7ea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "message": "Consumidor eliminado"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/endpoints": {
             "get": {
                 "tags": [
@@ -2408,6 +2808,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Consumidores",
+            "description": "Información sobre los usuarios con permisos para consumir la API."
+        },
         {
             "name": "EndPoints",
             "description": "Información sobre los EndPoints disponibles."

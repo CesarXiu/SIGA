@@ -23,11 +23,11 @@ Route::get('/logout', [AuthController::class, "logout"])->middleware('auth:api')
 Route::post('permisos/scopes', [PermisoController::class, 'storeScopes'])->middleware('auth:api');
 Route::delete('permisos/scopes', [PermisoController::class, 'deleteScopes'])->middleware('auth:api');
 // RUTAS DE SIGA //
-Route::resource('scopes', ScopeController::class)->middleware('auth:api');
-Route::resource('roles', RolController::class)->middleware('auth:api');
-Route::resource('consumidores', ConsumidorController::class)->middleware('auth:api');
-Route::resource('permisos', PermisoController::class)->middleware('auth:api');
-Route::resource('endpoints', EndPointController::class)->middleware('auth:api');
-Route::resource('rutas', RutaController::class)->middleware('auth:api');
-Route::resource('solicitudes', SolicitudController::class)->middleware('auth:api');
-Route::resource('modelos', ModeloController::class)->middleware('auth:api');
+Route::apiResource('scopes', ScopeController::class)->middleware('auth:api');
+Route::apiResource('roles', RolController::class)->middleware('auth:api');
+Route::apiResource('consumidores', ConsumidorController::class)->middleware('auth:api');
+Route::apiResource('permisos', PermisoController::class)->middleware('auth:api');
+Route::apiResource('endpoints', EndPointController::class)->middleware('auth:api');
+Route::apiResource('rutas', RutaController::class)->middleware('auth:api');
+Route::apiResource('solicitudes', SolicitudController::class)->middleware('auth:api');
+Route::apiResource('modelos', ModeloController::class)->middleware('auth:api');
