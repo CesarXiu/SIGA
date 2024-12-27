@@ -178,6 +178,13 @@ class AuthController extends Controller
  *         description="Nombre de la ruta a validar.",
  *         example="/api/alumnos"
  *     ),
+ *     @OA\Parameter(
+ *         name="metodo",
+ *         in="query",
+ *         required=true,
+ *         description="Metodo de la solicitud (GET, POST, PUT, DELETE).",
+ *         example="GET"
+ *     ),
  *     @OA\Response(
  *         response="200",
  *         description="Sesion cerrada correctamente.",
@@ -226,18 +233,19 @@ class AuthController extends Controller
             return response()->json(['error' => 'Consumidor no encontrado'], 404);
         }
         //VALIDAR ACCESO A RUTA
-        $permisos = $consumer->getRol->permisos; // Obtener los permisos del rol del consumidor
+        $permisos = $consumer->getRol->getPermisos; // Obtener los permisos del rol del consumidor
         $ruta = $request->query('route'); // Obtener la ruta a la que se quiere acceder
-        $rutaDB = Ruta::where('ruta', $ruta)->first(); // Buscar la ruta en la base de datos
+        $metodo = $request->query('metodo'); // Obtener el método de la petición
+        $rutaDB = Ruta::where('ruta', $ruta)->where('metodo', $metodo)->first(); // Buscar la ruta en la base de datos
         if ($rutaDB) { // Si la ruta existe
             $rutaScope = $rutaDB->scope; // Obtener el scope necesario para acceder a la ruta
             $scopeExists = collect($permisos)->contains('scope', $rutaScope); // Verificar si el consumidor tiene el scope necesario
 
             if (!$scopeExists) { // Si no tiene el scope necesario
-            return response()->json(['error' => 'Access denied: Permiso necesario no encontrado','ruta' => $ruta], 403);
-            }
+            return response()->json(['error' => 'Access denied: Permiso necesario no encontrado','ruta' => $permisos], 403);
+            } 
         } else {
-            return response()->json(['error' => 'Ruta '.$ruta.'no encontrada.'], 404);
+            return response()->json(['error' => 'Ruta '.$metodo.' => '.$ruta.' no encontrada.'], 404);
         }
         //SI TIENE EL SCOPE NECESARIO PARA ACCEDER A LA RUTA
         return response()->json([

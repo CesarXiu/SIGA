@@ -139,6 +139,13 @@
                         "description": "Nombre de la ruta a validar.",
                         "required": true,
                         "example": "/api/alumnos"
+                    },
+                    {
+                        "name": "metodo",
+                        "in": "query",
+                        "description": "Metodo de la solicitud (GET, POST, PUT, DELETE).",
+                        "required": true,
+                        "example": "GET"
                     }
                 ],
                 "responses": {
