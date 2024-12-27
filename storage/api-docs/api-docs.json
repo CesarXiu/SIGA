@@ -1597,6 +1597,377 @@
                 ]
             }
         },
+        "/api/permisos": {
+            "get": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Obtienes la informacion de los permisos.",
+                "description": "Obten la relacion de los scopes y roles.",
+                "operationId": "3aed49877f8a0e1c5ddb52ea90111989",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9dadc62c-e212-49bc-8333-46a33e36544b"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "permiso"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "vista": {
+                                                                "type": "string",
+                                                                "example": "basic"
+                                                            },
+                                                            "rol": {
+                                                                "type": "string",
+                                                                "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                            },
+                                                            "scope": {
+                                                                "type": "string",
+                                                                "example": "9d4b5b4c-f514-46d3-bec0-e91228923304"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "relationships": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Guarda un nuevo permiso.",
+                "description": "Guarda un nuevo permiso.",
+                "operationId": "8aa365d44fd5cd6877941893a254f08a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "vista": {
+                                        "type": "string",
+                                        "enum": [
+                                            "basic",
+                                            "complete"
+                                        ],
+                                        "example": "basic"
+                                    },
+                                    "rol": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                    },
+                                    "scope": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9d4b5b4c-f514-46d3-bec0-e91228923304"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Permiso creado exitosamente.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9dadc62c-e212-49bc-8333-46a33e36544b"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "permiso"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "vista": {
+                                                            "type": "string",
+                                                            "example": "basic"
+                                                        },
+                                                        "rol": {
+                                                            "type": "string",
+                                                            "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                                        },
+                                                        "scope": {
+                                                            "type": "string",
+                                                            "example": "9d4b5b4c-f514-46d3-bec0-e91228923304"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/permisos/scopes": {
+            "post": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Insercion de nuevos scopes para un rol.",
+                "description": "Guarda una lista de nuevos scopes para un rol.",
+                "operationId": "7f55ca1268daf4dd75c4f726aa6fc0b4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "vista": {
+                                        "type": "string",
+                                        "enum": [
+                                            "basic",
+                                            "complete"
+                                        ],
+                                        "example": "basic"
+                                    },
+                                    "rol": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                    },
+                                    "scope": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                            "example": "9d4b5b4c-f514-46d3-bec0-e91228923304"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Scopes agregados.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "message": "Scopes agregados"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Eliminacion de scopes en un rol.",
+                "description": "Elimina una lista de scopes para un rol.",
+                "operationId": "fc41a111054e95f27179036bd15e0188",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "activo": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "vista": {
+                                        "type": "string",
+                                        "enum": [
+                                            "basic",
+                                            "complete"
+                                        ],
+                                        "example": "basic"
+                                    },
+                                    "rol": {
+                                        "type": "string",
+                                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                        "example": "9d4b5f15-c250-4ac0-9a41-f8c9c2155d05"
+                                    },
+                                    "scope": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                                            "example": "9d4b5b4c-f514-46d3-bec0-e91228923304"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Scopes eliminados.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "message": "Scopes eliminados"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/roles": {
             "get": {
                 "tags": [
@@ -3481,6 +3852,10 @@
         {
             "name": "Modelos",
             "description": "Información sobre los Modelos solicitados."
+        },
+        {
+            "name": "Permisos",
+            "description": "Información sobre las relaciones entre Scopes y Roles (Permisos)."
         },
         {
             "name": "Roles",
