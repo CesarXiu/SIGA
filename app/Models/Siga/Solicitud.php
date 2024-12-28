@@ -4,7 +4,7 @@ namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
 
-use App\Http\Resources\SolicitudResource as Resource;
+use App\Http\Resources\SolicitudResource as Resource; //Resource para el modelo.
 use App\Models\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

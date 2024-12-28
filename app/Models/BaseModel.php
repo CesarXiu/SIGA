@@ -19,6 +19,11 @@ class BaseModel extends Model
     public $timestamps = false;
     //Se define el tipo de dato que se utilizara para el UUID.
     protected $keyType = 'string';
+    // Todos los metodos que implementen UtilTraits tienen que tener esta clase estatica para que funcione correctamente.
+    /**
+     * //Se define el tipo de recurso que se utilizara en el modelo.
+     * @return \Illuminate\Http\Resources\Json\JsonResource
+     */
     protected static function getResourceClass()
     {
         return [];
