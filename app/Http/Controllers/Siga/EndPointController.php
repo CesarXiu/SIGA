@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siga;
 use App\Http\Controllers\Controller;
 use App\Models\Siga\EndPoint;
 use App\Http\Requests\Siga\EndPointRequest as Request;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="EndPoints",
@@ -83,6 +84,7 @@ class EndPointController extends Controller
  */
     public function index()
     {
+        Gate::authorize('viewAny', EndPoint::class);
         return response()->json(EndPoint::resourceCollection(EndPoint::Included()->get()));
     }
 /**
@@ -175,6 +177,7 @@ class EndPointController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
+        Gate::authorize('create', EndPoint::class);
         $endpoint = EndPoint::create($data);
         return response()->json($endpoint->resource());
     }
@@ -259,6 +262,7 @@ class EndPointController extends Controller
     public function show($id)
     {
         $endPoint = EndPoint::findOrFail($id);
+        Gate::authorize('view', $endPoint);
         return response()->json($endPoint->resource());
     }
 
@@ -363,6 +367,7 @@ public function update(Request $request, $id)
 {
     $data = $request->validated();
     $endPoint = EndPoint::findOrFail($id);
+    Gate::authorize('view', $endPoint);
     $endPoint->update($data);
     return response()->json($endPoint->resource());
 }
@@ -406,8 +411,10 @@ public function update(Request $request, $id)
  *     )
  * )
  */
-    public function destroy(EndPoint $endPoint)
+    public function destroy($id)
     {
+        $endPoint = EndPoint::findOrFail($id);
+        Gate::authorize('view', $endPoint);
         $endPoint->delete();
         return response()->json(null, 204);
     }
