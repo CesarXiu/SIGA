@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siga;
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Ruta;
 use App\Http\Requests\Siga\RutaRequest as Request;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="Rutas",
@@ -101,6 +102,7 @@ class RutaController extends Controller
  */
     public function index()
     {
+        Gate::authorize('viewAny', Ruta::class);
         return response()->json(Ruta::resourceCollection(Ruta::all()));
     }
 
@@ -229,6 +231,7 @@ class RutaController extends Controller
  */
     public function store(Request $request)
     {
+        Gate::authorize('create', Ruta::class);
         $data = $request->validated();
         $ruta = Ruta::create($data);
         return response()->json($ruta->resource());
@@ -329,6 +332,7 @@ class RutaController extends Controller
     public function show($id)
     {
         $ruta = Ruta::findOrFail($id);
+        Gate::authorize('view', $ruta);
         return response()->json($ruta->resource());
     }
 
@@ -468,6 +472,7 @@ class RutaController extends Controller
     {
         $data = $request->validated();
         $ruta = Ruta::findOrFail($id);
+        Gate::authorize('update', $ruta);
         $ruta->update($data);
         return response()->json($ruta->resource());
     }
@@ -475,8 +480,10 @@ class RutaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ruta $ruta)
+    public function destroy($id)
     {
+        $ruta = Ruta::findOrFail($id);
+        Gate::authorize('delete', $ruta);
         $ruta->delete();
         return response()->json(null, 204);
     }

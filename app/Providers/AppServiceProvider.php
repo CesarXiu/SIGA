@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Siga\Solicitud;
 use App\Models\Siga\Scope;
 use App\Models\Siga\Modelos;
+use App\Models\Siga\Ruta;
 // Importacion de las Politicas
 use App\Policies\SolicitudPolicy;
 use App\Policies\ScopePolicy;
 use App\Policies\ModeloPolicy;
+use App\Policies\RutaPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Solicitud::class, SolicitudPolicy::class);
         Gate::policy(Scope::class, ScopePolicy::class);
         Gate::policy(Modelos::class, ModeloPolicy::class);
+        Gate::policy(Ruta::class, RutaPolicy::class);
     }
 }
