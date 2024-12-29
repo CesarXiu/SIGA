@@ -7,6 +7,7 @@ use App\Models\Siga\Consumidor;
 use App\Http\Requests\Siga\ConsumidorRequest as Request;
 use App\Http\Controllers\ClientController;
 use App\Models\Siga\Solicitud;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="Consumidores",
@@ -108,8 +109,9 @@ class ConsumidorController extends Controller
  */
     public function index()
     {
+        Gate::authorize('viewAny', Consumidor::class);
         //return Client::all();
-        return response()->json(Consumidor::resourceCollection(Consumidor::Included()->get()));
+        return response()->json(Consumidor::resourceCollection(Consumidor::Included()->Filtered()->get()));
     }
 
     /**
@@ -118,6 +120,7 @@ class ConsumidorController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
+        Gate::authorize('create', Consumidor::class);
         $newClient = ClientController::newClient($data['propietario'], $data['nombre']);
         $data['appid'] = $newClient['client_id'];
         try {
@@ -241,6 +244,7 @@ class ConsumidorController extends Controller
     public function show($id)
     {
         $consumidor = Consumidor::findOrFail($id);
+        Gate::authorize('view', $consumidor);
         return response()->json($consumidor->resource());
     }
 
@@ -381,6 +385,7 @@ class ConsumidorController extends Controller
     {
         $data = $request->validated();
         $consumidor = Consumidor::findOrFail($id);
+        Gate::authorize('view', $consumidor);
         $consumidor->update($data);
         return response()->json($consumidor->resource());
     }
@@ -430,6 +435,7 @@ class ConsumidorController extends Controller
     public function destroy( $id)
     {
         $consumidor = Consumidor::findOrFail($id);
+        Gate::authorize('view', $consumidor);
         $consumidor->delete();
         ClientController::deleteClient($consumidor['appid']);
         return response()->json(['message' => 'Consumidor eliminado']);

@@ -36,6 +36,14 @@ class Consumidor extends Authenticatable
         'rol',
         'propietario'
     ];
+    public $allowFilter = [
+        'nombre',
+        'email',
+        'activo',
+        'appid',
+        'rol',
+        'propietario'
+    ];
     protected function casts(): array
     {
         return [
@@ -51,7 +59,11 @@ class Consumidor extends Authenticatable
     {
         return ['coid'];
     }
-    protected $allowIncluded = ['App', 'Rol','Propietario','Rol.getPermisos','Rol.getPermisos.getScope','Rol.getPermisos.getScope.getEndPoint','Rol.getPermisos.getScope.getEndPoint.getRutas'];
+    protected $allowIncluded = [
+        'App', 'Rol','Propietario',
+        'Rol.getPermisos','Rol.getPermisos.getScope','Rol.getPermisos.getScope.getEndPoint',
+        'Rol.getPermisos.getScope.getEndPoint.getRutas'
+    ];
     public function getRol()
     {
         return $this->belongsTo(Rol::class, 'rol');
