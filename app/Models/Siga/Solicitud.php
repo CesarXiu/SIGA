@@ -21,6 +21,13 @@ class Solicitud extends Model
     protected $attributes = [
         'resuelto' => false
     ];
+    public $allowFilter = [
+        'correo',
+        'nombre',
+        'descripcion',
+        'resuelto',
+        'propietario'
+    ];
     protected $fillable = [
         'correo', 
         'nombre', 

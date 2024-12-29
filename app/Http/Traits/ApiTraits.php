@@ -45,4 +45,17 @@ trait ApiTraits{
         //Se cargan las relaciones en la consulta.
         $query->with($relations);
     }
+
+    public function scopeFiltered(Builder $query){
+        if(empty($this->allowFilter) || empty(request('filter'))){
+            return;
+        }
+        $allowFilter = collect($this->allowFilter);
+        $filters = request('filter');
+        foreach ($filters as $filter => $value) {
+            if($allowFilter->contains($filter)){
+                $query->where($filter, $value);
+            }
+        }
+    }
 }

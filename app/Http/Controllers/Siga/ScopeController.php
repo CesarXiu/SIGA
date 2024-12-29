@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siga;
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Scope;
 use App\Http\Requests\Siga\ScopeRequest as Request;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="Scopes",
@@ -80,6 +81,7 @@ class ScopeController extends Controller
  */
     public function index()
     {
+        Gate::authorize('viewAny',Scope::class);
         return response()->json(
             Scope::resourceCollection(Scope::all())
             , 200);
@@ -169,6 +171,7 @@ class ScopeController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
+        Gate::authorize('create',Scope::class);
         return response()->json(
             (Scope::create($data))->resource()
         , 201);
@@ -249,7 +252,7 @@ class ScopeController extends Controller
  */
     public function show(Scope $scope)
     {
-        //dd($scope);
+        Gate::authorize('view',Scope::class);
         return response()->json( 
             $scope->resource()
         , 200);
@@ -349,6 +352,7 @@ class ScopeController extends Controller
     public function update(Request $request, Scope $scope)
     {
         $data = $request->validated();
+        Gate::authorize('update',$scope);
         $scope->update($data);
         return response()->json(
             $scope->resource()
@@ -400,6 +404,7 @@ class ScopeController extends Controller
  */
     public function destroy(Scope $scope)
     {
+        Gate::authorize('delete',$scope);
         $scope->delete();
         return response()->json(null, 204);
     }

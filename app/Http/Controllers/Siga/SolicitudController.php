@@ -7,6 +7,7 @@ use App\Models\Siga\Solicitud;
 use App\Http\Requests\Siga\SolicitudRequest as Request;
 use App\Http\Requests\Siga\SolicitudUpdateRequest as UpdateRequest;
 use App\Models\Siga\Modelos;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="Solicitudes",
@@ -102,8 +103,9 @@ class SolicitudController extends Controller
  */
     public function index()
     {
+        Gate::authorize('viewAny', Solicitud::class);
         return response()->json(
-            Solicitud::resourceCollection(Solicitud::Included()->get())
+            Solicitud::resourceCollection(Solicitud::Included()->Filtered()->get())
         );
     }
 
@@ -417,6 +419,7 @@ class SolicitudController extends Controller
     public function show($id)
     {
         $solicitud = Solicitud::Included()->findOrFail($id);
+        Gate::authorize('view', $solicitud);
         return response()->json(
             $solicitud->resource()
         );
@@ -548,6 +551,7 @@ class SolicitudController extends Controller
         //dd($id);
         $data = $request->validated();
         $solicitud = Solicitud::findOrFail($id);
+        Gate::authorize('update', $solicitud);
         $solicitud->update($data);
         return response()->json(
             $solicitud->resource()
@@ -559,6 +563,6 @@ class SolicitudController extends Controller
      */
     public function destroy(Solicitud $solicitud)
     {
-        //
+        Gate::authorize('delete', $solicitud);
     }
 }

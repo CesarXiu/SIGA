@@ -3,6 +3,13 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+// Importacion de los Modelos
+use App\Models\Siga\Solicitud;
+use App\Models\Siga\Scope;
+// Importacion de las Politicas
+use App\Policies\SolicitudPolicy;
+use App\Policies\ScopePolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::policy(Solicitud::class, SolicitudPolicy::class);
+        Gate::policy(Scope::class, ScopePolicy::class);
     }
 }
