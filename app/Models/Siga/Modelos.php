@@ -19,6 +19,11 @@ class Modelos extends Model
         'data',
         'solicitud'
     ];
+    public $allowFilter = [
+        'nombre', 
+        'descripcion',
+        'solicitud'
+    ];
     protected function casts(): array
     {
         return [

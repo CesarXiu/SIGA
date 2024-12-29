@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siga;
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Modelos;
 use App\Http\Requests\Siga\ModeloRequest as Request;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="Modelos",
@@ -108,7 +109,8 @@ class ModeloController extends Controller
  */
     public function index()
     {
-        $modelos = Modelos::all();
+        Gate::authorize('viewAny', Modelos::class);
+        $modelos = Modelos::Filtered()->get();
         return response()->json(Modelos::resourceCollection($modelos));
     }
 /**
@@ -250,12 +252,13 @@ class ModeloController extends Controller
  *     )
  * )
  */
-public function store(Request $request)
-{
-    $data = $request->validated();
-    $modelo = Modelos::createModelo($data);
-    return response()->json($modelo->resource(), 201);
-}
+    public function store(Request $request)
+    {
+        $data = $request->validated();
+        Gate::authorize('create', Modelos::class);
+        $modelo = Modelos::createModelo($data);
+        return response()->json($modelo->resource(), 201);
+    }
 
 /**
  * Muestra la información de un Modelo específico.
@@ -358,7 +361,8 @@ public function store(Request $request)
  */
     public function show($id)
     {
-        $modelo = Modelos::find($id);
+        $modelo = Modelos::findOrFail($id);
+        Gate::authorize('view', $modelo);
         return response()->json(
             $modelo->resource()
         );
@@ -516,6 +520,7 @@ public function store(Request $request)
     {
         $data = $request->validated();
         $modelo = Modelos::findOrFail($id);
+        Gate::authorize('update', $modelo);
         $modelo->updateModelo($data);
         return response()->json($modelo->resource());
     }
@@ -564,6 +569,7 @@ public function store(Request $request)
     public function destroy($id)
     {
         $modelo = Modelos::findOrFail($id);
+        Gate::authorize('delete', $modelo);
         $modelo->delete();
         return response()->json(null, 204);
     }
