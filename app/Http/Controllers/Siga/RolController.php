@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siga;
 use App\Http\Controllers\Controller;
 use App\Models\Siga\Rol;
 use App\Http\Requests\Siga\RolRequest as Request;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="Roles",
@@ -86,6 +87,7 @@ class RolController extends Controller
  */
     public function index()
     {
+        Gate::authorize('viewAny', Rol::class);
         return response()->json(Rol::resourceCollection(Rol::Included()->get()));
     }
 /**
@@ -177,12 +179,13 @@ class RolController extends Controller
  *     )
  * )
  */
-public function store(Request $request)
-{
-    $data = $request->validated();
-    $rol = Rol::create($data);
-    return response()->json($rol->resource(), 201);
-}
+    public function store(Request $request)
+    {
+        $data = $request->validated();
+        Gate::authorize('create', Rol::class);
+        $rol = Rol::create($data);
+        return response()->json($rol->resource(), 201);
+    }
 
 /**
  * Obten la informacion de un Rol especifico.
@@ -264,6 +267,7 @@ public function store(Request $request)
     public function show($id)
     {
         $rol = Rol::findOrFail($id);
+        Gate::authorize('view', $rol);
         return response()->json($rol->resource());
     }
 
@@ -368,6 +372,7 @@ public function store(Request $request)
     public function update(Request $request, Rol $rol)
     {
         $data = $request->validated();
+        Gate::authorize('update', $rol);
         $rol->update($data);
         return response()->json($rol->resource());
     }
@@ -416,6 +421,7 @@ public function store(Request $request)
     public function destroy($id)
     {
         $rol = Rol::findOrFail($id);
+        Gate::authorize('delete', $rol);
         $rol->delete();
         return response()->json(null, 204);
     }
