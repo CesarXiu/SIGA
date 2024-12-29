@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siga\Permiso;
 use App\Http\Requests\Siga\PermisoRequest as Request;
 use App\Http\Requests\PermisoBulkRequest;
+use Illuminate\Support\Facades\Gate;
 /**
  * @OA\Tag(
  *     name="Permisos",
@@ -97,6 +98,7 @@ class PermisoController extends Controller
     */
     public function index()
     {
+        Gate::authorize('viewAny', Permiso::class);
         return response()->json(Permiso::resourceCollection(Permiso::all()));
     }
 
@@ -208,6 +210,7 @@ class PermisoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
+        Gate::authorize('create', Permiso::class);
         return Permiso::create($data);
     }
     /**
@@ -281,6 +284,7 @@ class PermisoController extends Controller
     public function storeScopes(PermisoBulkRequest $request)
     {
         $data = $request->validated();
+        Gate::authorize('create', Permiso::class);
         foreach($data['scope'] as $scope){
             Permiso::create([
                 'scope' => $scope,
@@ -360,6 +364,7 @@ class PermisoController extends Controller
     public function deleteScopes(PermisoBulkRequest $request)
     {
         $data = $request->validated();
+        Gate::authorize('delete', Permiso::class);
         foreach($data['scope'] as $scope){
             Permiso::where('rol', $data['rol'])
                     ->whereIn('scope', $data['scope'])
@@ -371,9 +376,11 @@ class PermisoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Permiso $permiso)
+    public function show($id)
     {
-        //
+        $permiso = Permiso::findOrFail($id);
+        Gate::authorize('view', $permiso);
+        return response()->json($permiso->resource());
     }
 
     /**
