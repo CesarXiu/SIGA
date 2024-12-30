@@ -28,7 +28,9 @@ class Compartido extends Model
         'Consumidor.getRol.getPermisos',
         'Consumidor.getRol.getPermisos.getScope',
         'Consumidor.getRol.getPermisos.getScope.getEndPoint',
-        'Consumidor.getRol.getPermisos.getScope.getEndPoint.getRutas'
+        'Consumidor.getRol.getPermisos.getScope.getEndPoint.getRutas',
+        'Consumidor.getPropietario',
+        'Consumidor.getApp'
     ];
     //Rol.getPermisos.getScope.getEndPoint.getRutas,Propietario,App
     public function getConsumidor()

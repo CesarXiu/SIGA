@@ -13,6 +13,7 @@ use App\Models\Siga\Rol;
 use App\Models\Siga\Permiso;
 use App\Models\Siga\EndPoint;
 use App\Models\Siga\Consumidor;
+use App\Models\Siga\Compartido;
 // Importacion de las Politicas
 use App\Policies\SolicitudPolicy;
 use App\Policies\ScopePolicy;
@@ -22,7 +23,7 @@ use App\Policies\RolPolicy;
 use App\Policies\PermisoPolicy;
 use App\Policies\EndPointPolicy;
 use App\Policies\ConsumidorPolicy;
-
+use App\Policies\CompartidoPolicy;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Permiso::class, PermisoPolicy::class);
         Gate::policy(EndPoint::class, EndPointPolicy::class);
         Gate::policy(Consumidor::class, ConsumidorPolicy::class);
+        Gate::policy(Compartido::class, CompartidoPolicy::class);
         
     }
 }

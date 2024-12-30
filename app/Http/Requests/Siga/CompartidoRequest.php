@@ -11,7 +11,8 @@ class CompartidoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->id === $this->input('usuario') || 
+                auth()->user()->rol === 'admin';
     }
 
     /**
