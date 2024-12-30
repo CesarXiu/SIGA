@@ -14,14 +14,20 @@ class CompartidoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $compartido = $this->resource;
+        if ($compartido->relationLoaded('getConsumidor')) {
+            $consumidor = ["Consumidor" => $compartido->getConsumidor->resource()['data']];
+        }
+        $relationships = array_merge($consumidor ?? []);
         return [
-            'id' => $this->coid,
+            'id' => $compartido->coid,
             'type' => 'compartido',
             'attributes' => [
-                'activo' => $this->activo,
-                'usuario' => $this->usuario,
-                'consumidor' => $this->consumidor,
+                'activo' => $compartido->activo,
+                'usuario' => $compartido->usuario,
+                'consumidor' => $compartido->consumidor,
             ],
+            'relationships' => $relationships
         ];
     }
 }

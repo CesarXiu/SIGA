@@ -13,7 +13,10 @@ class CompartidoController extends Controller
      */
     public function index()
     {
-        //
+        $compartidos = Compartido::Included()->get();
+        return response()->json(
+            Compartido::resourceCollection($compartidos)
+        );
     }
 
     /**
@@ -23,9 +26,7 @@ class CompartidoController extends Controller
     {
         $data = $request->validated();
         $compartido = Compartido::create($data);
-        return response()->json([
-            "compartido" => $compartido
-        ]);
+        return response()->json($compartido->resource());
     }
 
     /**

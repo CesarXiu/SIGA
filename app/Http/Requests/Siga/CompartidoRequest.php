@@ -24,7 +24,7 @@ class CompartidoRequest extends FormRequest
         return [
             'usuario' => 'required|string|exists:users,id',
             'consumidor' => 'required|string|exists:consumidores,coid',
-            'activo' => 'required|boolean'
+            'activo' => 'boolean'
         ];
     }
 }

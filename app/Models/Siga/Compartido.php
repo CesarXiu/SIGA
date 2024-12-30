@@ -17,6 +17,24 @@ class Compartido extends Model
         'usuario',
         'consumidor'
     ];
+    protected $allowFilter = [
+        'usuario',
+        'activo',
+        'consumidor'
+    ];
+    protected $allowIncluded = [
+        'Consumidor',
+        'Consumidor.getRol',
+        'Consumidor.getRol.getPermisos',
+        'Consumidor.getRol.getPermisos.getScope',
+        'Consumidor.getRol.getPermisos.getScope.getEndPoint',
+        'Consumidor.getRol.getPermisos.getScope.getEndPoint.getRutas'
+    ];
+    //Rol.getPermisos.getScope.getEndPoint.getRutas,Propietario,App
+    public function getConsumidor()
+    {
+        return $this->belongsTo(Consumidor::class, 'consumidor', 'coid');
+    }
     protected function casts(): array
     {
         return [
