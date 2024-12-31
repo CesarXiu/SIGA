@@ -54,6 +54,11 @@ class ScopeController extends Controller
  *                             property="nombre",
  *                             type="string",
  *                             example="nombre.read"
+ *                         ),
+ *                         @OA\Property(
+ *                             property="endpoint",
+ *                             type="string",
+ *                             example="9d78f245-f961-4b5a-95cb-825620e5602af"
  *                         )
  *                     )
  *                 )
@@ -108,7 +113,12 @@ class ScopeController extends Controller
  *                 property="nombre",
  *                 type="string",
  *                 example="alumno.read"
- *             )
+ *             ),
+ *                         @OA\Property(
+ *                             property="endpoint",
+ *                             type="string",
+ *                             example="9d78f245-f961-4b5a-95cb-825620e5602af"
+ *                         )
  *         )
  *     )
  * ),
@@ -144,6 +154,11 @@ class ScopeController extends Controller
  *                             property="nombre",
  *                             type="string",
  *                             example="nombre.read"
+ *                         ),
+ *                         @OA\Property(
+ *                             property="endpoint",
+ *                             type="string",
+ *                             example="9d78f245-f961-4b5a-95cb-825620e5602af"
  *                         )
  *                     )
  *                 )
@@ -226,6 +241,11 @@ class ScopeController extends Controller
  *                             property="nombre",
  *                             type="string",
  *                             example="nombre.read"
+ *                         ),
+ *                         @OA\Property(
+ *                             property="endpoint",
+ *                             type="string",
+ *                             example="9d78f245-f961-4b5a-95cb-825620e5602af"
  *                         )
  *                     )
  *                 )
@@ -289,7 +309,12 @@ class ScopeController extends Controller
  *                 property="nombre",
  *                 type="string",
  *                 example="alumno.read"
- *             )
+ *             ),
+ *                         @OA\Property(
+ *                             property="endpoint",
+ *                             type="string",
+ *                             example="9d78f245-f961-4b5a-95cb-825620e5602af"
+ *                         )
  *         )
  *     )
  * ),
@@ -325,6 +350,11 @@ class ScopeController extends Controller
  *                             property="nombre",
  *                             type="string",
  *                             example="nombre.read"
+ *                         ),
+ *                         @OA\Property(
+ *                             property="endpoint",
+ *                             type="string",
+ *                             example="9d78f245-f961-4b5a-95cb-825620e5602af"
  *                         )
  *                     )
  *                 )
