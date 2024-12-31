@@ -105,7 +105,7 @@ class SolicitudController extends Controller
     {
         Gate::authorize('viewAny', Solicitud::class);
         return response()->json(
-            Solicitud::resourceCollection(Solicitud::Included()->Filtered()->get())
+            Solicitud::resourceCollection(Solicitud::Included()->Filtered()->Sorted()->get())
         );
     }
 

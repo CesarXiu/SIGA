@@ -58,4 +58,22 @@ trait ApiTraits{
             }
         }
     }
+
+    public function scopeSorted(Builder $query){
+        if(empty($this->allowSort) || empty(request('sort'))){
+            return;
+        }
+        $allowSort = collect($this->allowSort);
+        $sorts = explode(',', request('sort'));
+        foreach ($sorts as $sort) {
+            $direction = 'asc';
+            if(substr($sort, 0, 1) == '-'){
+                $direction = 'desc';
+                $sort = substr($sort, 1);
+            }
+            if($allowSort->contains($sort)){
+                $query->orderBy($sort, $direction);
+            }
+        }
+    }
 }

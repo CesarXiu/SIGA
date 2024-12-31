@@ -28,6 +28,10 @@ class Solicitud extends Model
         'resuelto',
         'propietario'
     ];
+    protected $allowSort = [
+        'resuelto',
+        'created_at'
+    ];
     protected $fillable = [
         'correo', 
         'nombre', 
