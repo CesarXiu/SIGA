@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Siga\Compartido;
 use App\Http\Requests\Siga\CompartidoRequest as Request;
 use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 
 class CompartidoController extends Controller
 {
@@ -27,7 +28,9 @@ class CompartidoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validated();
-        Gate::authorize('create', Compartido::class); //La validacion se hace desde el request
+        Gate::authorize('create',[Compartido::class, $data]); //La validacion se hace desde el request
+        $usuario = User::where('email', $data['usuario'])->first();
+        $data['usuario'] = $usuario->id;
         $compartido = Compartido::create($data);
         return response()->json($compartido->resource());
     }

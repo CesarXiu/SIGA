@@ -18,7 +18,10 @@ class CompartidoResource extends JsonResource
         if ($compartido->relationLoaded('getConsumidor')) {
             $consumidor = ["Consumidor" => $compartido->getConsumidor->resource()['data']];
         }
-        $relationships = array_merge($consumidor ?? []);
+        if ($compartido->relationLoaded('getUsuario')) {
+            $usuario = ["Usuario" => $compartido->getUsuario->resource()['data']];
+        }
+        $relationships = array_merge($consumidor ?? [], $usuario ?? []);
         return [
             'id' => $compartido->coid,
             'type' => 'compartido',

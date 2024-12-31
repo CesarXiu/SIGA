@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\Siga\Compartido;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use App\Models\Siga\Consumidor;
 
 class CompartidoPolicy
 {
@@ -36,12 +36,14 @@ class CompartidoPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, $data): bool
     {
-        /*if($user->rol === 'admin'){
+        if($user->rol === 'admin'){
             return true;
-        }*/
-        return true;
+        }else{
+            $consumidor = Consumidor::findOrFail($data['consumidor']);
+            return $user->id === $consumidor->propietario;
+        }
     }
 
     /**

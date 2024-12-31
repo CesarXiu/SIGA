@@ -11,8 +11,7 @@ class CompartidoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->id === $this->input('usuario') || 
-                auth()->user()->rol === 'admin';
+        return true;
     }
 
     /**
@@ -23,7 +22,7 @@ class CompartidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'usuario' => 'required|string|exists:users,id',
+            'usuario' => 'required|string|exists:users,email',
             'consumidor' => 'required|string|exists:consumidores,coid',
             'activo' => 'boolean'
         ];

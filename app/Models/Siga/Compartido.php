@@ -3,6 +3,7 @@
 namespace App\Models\Siga;
 
 use App\Models\BaseModel as Model;
+use App\Models\User;
 use App\Http\Resources\CompartidoResource as Resource;
 
 class Compartido extends Model
@@ -23,6 +24,7 @@ class Compartido extends Model
         'consumidor'
     ];
     protected $allowIncluded = [
+        'Usuario',
         'Consumidor',
         'Consumidor.getRol',
         'Consumidor.getRol.getPermisos',
@@ -36,6 +38,9 @@ class Compartido extends Model
     public function getConsumidor()
     {
         return $this->belongsTo(Consumidor::class, 'consumidor', 'coid');
+    }
+    public function getUsuario(){
+        return $this->belongsTo(User::class, 'usuario');
     }
     protected function casts(): array
     {

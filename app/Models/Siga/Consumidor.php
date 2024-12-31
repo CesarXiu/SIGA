@@ -60,7 +60,7 @@ class Consumidor extends Authenticatable
         return ['coid'];
     }
     protected $allowIncluded = [
-        'App', 'Rol','Propietario',
+        'App', 'Rol','Propietario', 'Compartidos', 'Compartidos.getUsuario',
         'Rol.getPermisos','Rol.getPermisos.getScope','Rol.getPermisos.getScope.getEndPoint',
         'Rol.getPermisos.getScope.getEndPoint.getRutas'
     ];
@@ -73,6 +73,9 @@ class Consumidor extends Authenticatable
     }
     public function getPropietario(){
         return $this->belongsTo(User::class, 'propietario');
+    }
+    public function getCompartidos(){
+        return $this->hasMany(Compartido::class, 'consumidor', 'coid');
     }
     protected static function getResourceClass()
     {

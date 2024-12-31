@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\Siga\Compartido;
 
 class ConsumidorResource extends JsonResource
 {
@@ -24,7 +25,10 @@ class ConsumidorResource extends JsonResource
         if ($consumidor->relationLoaded('getPropietario')) {
             $Propietario = ["Propietario" => $consumidor->getPropietario->resource()['data']];
         }
-        $relationships = array_merge($App ?? [], $Rol ?? [], $Propietario ?? []);
+        if ($consumidor->relationLoaded('getCompartidos')) {
+            $Compartidos = ["Compartidos" => Compartido::resourceCollection($consumidor->getCompartidos)['data']];
+        }
+        $relationships = array_merge($App ?? [], $Rol ?? [], $Propietario ?? [], $Compartidos ?? []);
         return [ 
             'id' => $consumidor->coid,
             'type' => 'consumidor',
