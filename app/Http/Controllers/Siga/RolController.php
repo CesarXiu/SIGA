@@ -369,9 +369,10 @@ class RolController extends Controller
  *     )
  * )
  */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, $id)
     {
         $data = $request->validated();
+        $rol = Rol::findOrFail($id);
         Gate::authorize('update', $rol);
         $rol->update($data);
         return response()->json($rol->resource());
