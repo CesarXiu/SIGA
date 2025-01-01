@@ -77,6 +77,11 @@ class ConsumidorController extends Controller
  *                                 property="propietario",
  *                                 type="integer",
  *                                 example=2
+ *                             ),
+ *                             @OA\Property(
+ *                                 property="solicitud",
+ *                                 type="integer",
+ *                                 example="9d4b687f-fc63-4054-bf3b-b159f6c124ab"
  *                             )
  *                         ),
  *                         @OA\Property(
@@ -212,6 +217,11 @@ class ConsumidorController extends Controller
  *                                 property="propietario",
  *                                 type="integer",
  *                                 example=2
+ *                             ),
+ *                             @OA\Property(
+ *                                 property="solicitud",
+ *                                 type="integer",
+ *                                 example="9d4b687f-fc63-4054-bf3b-b159f6c124ab"
  *                             )
  *                         ),
  *                         @OA\Property(
@@ -352,6 +362,11 @@ class ConsumidorController extends Controller
  *                                 property="propietario",
  *                                 type="integer",
  *                                 example=2
+ *                             ),
+ *                             @OA\Property(
+ *                                 property="solicitud",
+ *                                 type="integer",
+ *                                 example="9d4b687f-fc63-4054-bf3b-b159f6c124ab"
  *                             )
  *                         ),
  *                         @OA\Property(

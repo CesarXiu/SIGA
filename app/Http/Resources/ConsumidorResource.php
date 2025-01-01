@@ -39,6 +39,7 @@ class ConsumidorResource extends JsonResource
                 'appid' => $consumidor->appid,
                 'rol' => $consumidor->rol,
                 'propietario' => $consumidor->propietario,
+                'solicitud' => $consumidor->solicitud,
             ],
             'relationships' => $relationships
         ];

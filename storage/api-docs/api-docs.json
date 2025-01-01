@@ -249,6 +249,10 @@
                                                             "propietario": {
                                                                 "type": "integer",
                                                                 "example": 2
+                                                            },
+                                                            "solicitud": {
+                                                                "type": "integer",
+                                                                "example": "9d4b687f-fc63-4054-bf3b-b159f6c124ab"
                                                             }
                                                         },
                                                         "type": "object"
@@ -356,6 +360,10 @@
                                                         "propietario": {
                                                             "type": "integer",
                                                             "example": 2
+                                                        },
+                                                        "solicitud": {
+                                                            "type": "integer",
+                                                            "example": "9d4b687f-fc63-4054-bf3b-b159f6c124ab"
                                                         }
                                                     },
                                                     "type": "object"

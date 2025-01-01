@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Passport;
 // Importacion de los Modelos
 use App\Models\Siga\Solicitud;
 use App\Models\Siga\Scope;
@@ -39,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Definicion de las politicas
         Gate::policy(Solicitud::class, SolicitudPolicy::class);
         Gate::policy(Scope::class, ScopePolicy::class);
         Gate::policy(Modelos::class, ModeloPolicy::class);
@@ -48,6 +50,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(EndPoint::class, EndPointPolicy::class);
         Gate::policy(Consumidor::class, ConsumidorPolicy::class);
         Gate::policy(Compartido::class, CompartidoPolicy::class);
-        
+        // CONFIGURACION DE PASSPORT
+        Passport::tokensExpireIn(now()->addHours(12));
+        Passport::refreshTokensExpireIn(now()->addDays(7));
     }
 }
