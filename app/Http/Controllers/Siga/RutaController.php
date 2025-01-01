@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Siga;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RutaEndPointBulkRequest;
 use App\Models\Siga\Ruta;
 use App\Http\Requests\Siga\RutaRequest as Request;
 use Illuminate\Support\Facades\Gate;
@@ -475,6 +476,18 @@ class RutaController extends Controller
         Gate::authorize('update', $ruta);
         $ruta->update($data);
         return response()->json($ruta->resource());
+    }
+    public function bulkUpdate(RutaEndPointBulkRequest $request)
+    {
+        $data = $request->validated();
+        $rutas = Ruta::whereIn('ruid', $data['rutas'])->get();
+        $rutas->each(function($ruta) use ($data){
+            $ruta->endpoint = $data['endpoint'];
+            $ruta->save();
+        });
+        return response()->json([
+            'message' => 'Rutas actualizadas correctamente'
+        ]);
     }
 
     /**
