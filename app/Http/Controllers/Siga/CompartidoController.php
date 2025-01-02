@@ -38,9 +38,11 @@ class CompartidoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Compartido $compartido)
+    public function show($id)
     {
-        //
+        $compartido = Compartido::findOrFail($id);
+        Gate::authorize('view',$compartido);
+        return response()->json($compartido->resource());
     }
 
     /**
@@ -48,7 +50,7 @@ class CompartidoController extends Controller
      */
     public function update(Request $request, Compartido $compartido)
     {
-        //
+        
     }
 
     /**

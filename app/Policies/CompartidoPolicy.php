@@ -16,8 +16,12 @@ class CompartidoPolicy
         if($user->rol === 'admin'){
             return true;
         }
-        if(!empty(request('filter')['usuario'])){
-            return $user->id === (int) request('filter')['usuario'];
+        if(!empty(request('filter')['usuario']) && !empty(request('filter')['activo'])){
+            return $user->id === (int) request('filter')['usuario'] && request('filter')['activo'] == 1;
+        }
+        if(!empty(request('filter')['consumidor'])){
+            $consumidor = Consumidor::findOrFail(request('filter')['consumidor']);
+            return (string)$user->id === (string)$consumidor->propietario;
         }
         return false;
     }
@@ -30,7 +34,9 @@ class CompartidoPolicy
         if($user->rol === 'admin'){
             return true;
         }
-        return $user->id === $compartido->usuario;
+        $propietario = $compartido->getConsumidor['propietario'];
+        unset($compartido->getConsumidor);
+        return ((string) $user->id === $compartido->usuario && $compartido->activo == 1) || (string) $user->id === (string) $propietario;//
     }
 
     /**
@@ -54,7 +60,9 @@ class CompartidoPolicy
         if($user->rol === 'admin'){
             return true;
         }
-        return true;//$user->id === $compartido->usuario;
+        $propietario = $compartido->getConsumidor['propietario'];
+        unset($compartido->getConsumidor);
+        return (string)$user->id === (string)$propietario;//$user->id === $compartido->usuario;
     }
 
     /**
@@ -62,7 +70,7 @@ class CompartidoPolicy
      */
     public function delete(User $user, Compartido $compartido): bool
     {
-        return false;
+        return $user->rol === 'admin';
     }
 
     /**
