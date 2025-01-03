@@ -227,29 +227,38 @@ class AuthController extends Controller
         $payload = json_decode(base64_decode($jwt[1]), true); // Decodificar el payload
 
         $consumer = Consumidor::where('appid', $payload['aud'])->first(); // Buscar el consumidor por el appid
-        if ($consumer) {
+        if ($consumer && $consumer->activo) { // Si el consumidor existe y está activo
             auth()->login($consumer); // Autenticar al consumidor
         } else {
-            return response()->json(['error' => 'Consumidor no encontrado'], 404);
+            return response()->json(['error' => 'Consumidor no encontrado o desactivado'], 404);
         }
         //VALIDAR ACCESO A RUTA
         $permisos = $consumer->getRol->getPermisos; // Obtener los permisos del rol del consumidor
+        if(!$consumer->getRol->activo){
+            return response()->json(['error' => 'Access denied: Rol desactivado'], 403);
+        }
         $ruta = $request->query('route'); // Obtener la ruta a la que se quiere acceder
         $metodo = $request->query('metodo'); // Obtener el método de la petición
         $rutaDB = Ruta::where('ruta', $ruta)->where('metodo', $metodo)->first(); // Buscar la ruta en la base de datos
-        if ($rutaDB) { // Si la ruta existe
-            $rutaScope = $rutaDB->scope; // Obtener el scope necesario para acceder a la ruta
-            $scopeExists = collect($permisos)->contains('scope', $rutaScope); // Verificar si el consumidor tiene el scope necesario
-
-            if (!$scopeExists) { // Si no tiene el scope necesario
-            return response()->json(['error' => 'Access denied: Permiso necesario no encontrado','ruta' => $permisos], 403);
-            } 
+        if ($rutaDB && $rutaDB->activo) { // Si la ruta existe
+            $scope = $rutaDB->getScope; // Obtener el scope necesario para acceder a la ruta
+            $endpoint = $rutaDB->getEndpoint;
+            if($scope->activo && $endpoint->activo){
+                $rutaScope = $scope->scid; // Obtener el scope necesario para acceder a la ruta
+                $scopeExists = collect($permisos)->contains('scope', $rutaScope); // Verificar si el consumidor tiene el scope necesario
+                if (!$scopeExists) { // Si no tiene el scope necesario
+                    return response()->json(['error' => 'Access denied: Permiso necesario no encontrado','ruta' => $permisos], 403);
+                }
+            }else{
+                return response()->json(['error' => 'Access denied: Scope o Endpoint desactivado'], 403);
+            }
         } else {
-            return response()->json(['error' => 'Ruta '.$metodo.' => '.$ruta.' no encontrada.'], 404);
+            return response()->json(['error' => 'Ruta '.$metodo.' => '.$ruta.' no encontrada o desactivada'], 404);
         }
         //SI TIENE EL SCOPE NECESARIO PARA ACCEDER A LA RUTA
         return response()->json([
             'Consumidor' => $consumer->getPropietario->email, // Propietario del consumidor
         ],  200);
     }
+
 }
