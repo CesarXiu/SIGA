@@ -197,6 +197,413 @@
                 ]
             }
         },
+        "/api/compartidos": {
+            "get": {
+                "tags": [
+                    "Compartidos"
+                ],
+                "summary": "Obtienes la informacion de todas las cuentas compartidas.",
+                "description": "Obten la informacion de todas las cuentas Compartidos.",
+                "operationId": "e5e79728ff36a0343040ab510149a148",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9dd9d2d4-6a0a-413f-89af-38f7d313ed1d"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "compartido"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "usuario": {
+                                                                "type": "string",
+                                                                "example": "3"
+                                                            },
+                                                            "consumidor": {
+                                                                "type": "string",
+                                                                "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "relationships": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Compartidos"
+                ],
+                "summary": "Compartir una cuenta de consumidor con otro usuario.",
+                "description": "Compartir una cuenta con un usuario.",
+                "operationId": "7bda4c60659abdde6a88af5c26f0ac24",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "usuario": {
+                                        "description": "Email del usuario con el que se compartirá la cuenta",
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "consumidor": {
+                                        "description": "ID del consumidor",
+                                        "type": "string",
+                                        "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                    },
+                                    "activo": {
+                                        "description": "Estado de la cuenta compartida",
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9dd9d2d4-6a0a-413f-89af-38f7d313ed1d"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "compartido"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "usuario": {
+                                                                "type": "string",
+                                                                "example": "3"
+                                                            },
+                                                            "consumidor": {
+                                                                "type": "string",
+                                                                "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "relationships": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/compartidos/{compartido}": {
+            "get": {
+                "tags": [
+                    "Compartidos"
+                ],
+                "summary": "Obtienes la informacion de todas las cuentas compartidas.",
+                "description": "Obten la informacion de todas las cuentas Compartidos.",
+                "operationId": "4561b1c9d636affeefd543f2c36f2414",
+                "parameters": [
+                    {
+                        "name": "compartido",
+                        "in": "path",
+                        "description": "ID del compartido",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "9dd9d2d4-6a0a-413f-89af-38f7d313ed1d"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "compartido"
+                                                },
+                                                "attributes": {
+                                                    "properties": {
+                                                        "activo": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "usuario": {
+                                                            "type": "string",
+                                                            "example": "3"
+                                                        },
+                                                        "consumidor": {
+                                                            "type": "string",
+                                                            "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "relationships": {
+                                                    "type": "array",
+                                                    "items": {}
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Compartidos"
+                ],
+                "summary": "Modificar el usuario compartido.",
+                "description": "Modificar el usuario compartido.",
+                "operationId": "23ea523ccc1722b1f1734834d24c3e38",
+                "parameters": [
+                    {
+                        "name": "compartido",
+                        "in": "path",
+                        "description": "ID del compartido",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/vnd.api+json": {
+                            "schema": {
+                                "properties": {
+                                    "usuario": {
+                                        "description": "Email del usuario con el que se compartirá la cuenta",
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "consumidor": {
+                                        "description": "ID del consumidor",
+                                        "type": "string",
+                                        "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                    },
+                                    "activo": {
+                                        "description": "Estado de la cuenta compartida",
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "example": "9dd9d2d4-6a0a-413f-89af-38f7d313ed1d"
+                                                    },
+                                                    "type": {
+                                                        "type": "string",
+                                                        "example": "compartido"
+                                                    },
+                                                    "attributes": {
+                                                        "properties": {
+                                                            "activo": {
+                                                                "type": "boolean",
+                                                                "example": true
+                                                            },
+                                                            "usuario": {
+                                                                "type": "string",
+                                                                "example": "3"
+                                                            },
+                                                            "consumidor": {
+                                                                "type": "string",
+                                                                "example": "9d4b6976-119f-479d-a7f8-89d766f91015"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "relationships": {
+                                                        "type": "array",
+                                                        "items": {}
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error interno del servidor. Por favor, intenta de nuevo o reporta al administrador.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Error interno del servidor"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recurso no encontrado.",
+                        "content": {
+                            "application/vnd.api+json": {
+                                "example": {
+                                    "error": "Not found."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/api/consumidores": {
             "get": {
                 "tags": [
@@ -504,6 +911,10 @@
                                                         "propietario": {
                                                             "type": "integer",
                                                             "example": 2
+                                                        },
+                                                        "solicitud": {
+                                                            "type": "integer",
+                                                            "example": "9d4b687f-fc63-4054-bf3b-b159f6c124ab"
                                                         }
                                                     },
                                                     "type": "object"
@@ -3879,6 +4290,10 @@
         {
             "name": "Autenticación",
             "description": "Rutas utilizadas para la autenticacion."
+        },
+        {
+            "name": "Compartidos",
+            "description": "Información sobre las cuentas compartidas."
         },
         {
             "name": "Consumidores",

@@ -24,6 +24,7 @@ Route::get('/logout', [AuthController::class, "logout"])->middleware('auth:api')
 Route::post('permisos/scopes', [PermisoController::class, 'storeScopes'])->middleware('auth:api');//
 Route::delete('permisos/scopes', [PermisoController::class, 'deleteScopes'])->middleware('auth:api');//
 Route::put('rutas/endpoint', [RutaController::class, 'bulkUpdate'])->middleware('auth:api');//
+Route::put('compartidos', [CompartidoController::class, 'bulkUpdate'])->middleware('auth:api');//
 // RUTAS DE SIGA //
 Route::apiResource('scopes', ScopeController::class)->middleware('auth:api'); //
 Route::apiResource('roles', RolController::class)->middleware('auth:api'); //
