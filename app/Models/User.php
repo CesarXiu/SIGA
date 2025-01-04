@@ -36,6 +36,12 @@ class User extends Authenticatable
         'password',
         'remember_token'
     ];
+    /**
+     * Atributos predeterminados del modelo User.
+     *
+     * @var array
+     * @property string $rol Rol del usuario, por defecto es 'user'.
+     */
     protected $attributes = [
         'rol' => 'user'
     ];
