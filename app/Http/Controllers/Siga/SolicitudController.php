@@ -101,6 +101,16 @@ class SolicitudController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra una lista de recursos de Solicitud.
+     *
+     * Este método autoriza al usuario para ver cualquier recurso de Solicitud
+     * utilizando la política de autorización 'viewAny'. Luego, devuelve una
+     * respuesta JSON con una colección de recursos de Solicitud que han sido
+     * incluidos, filtrados y ordenados.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de recursos de Solicitud.
+     */
     public function index()
     {
         Gate::authorize('viewAny', Solicitud::class);
@@ -304,6 +314,12 @@ class SolicitudController extends Controller
  *     )
  * )
  */
+    /**
+     * Almacena una nueva solicitud en la base de datos.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON que contiene la solicitud creada.
+     */
     public function store(Request $request)
     {
         $data = $request->validated();
@@ -416,6 +432,14 @@ class SolicitudController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra la solicitud especificada.
+     *
+     * @param  int  $id  El ID de la solicitud a mostrar.
+     * @return \Illuminate\Http\JsonResponse  La respuesta JSON con los datos de la solicitud.
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para ver la solicitud.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra la solicitud con el ID especificado.
+     */
     public function show($id)
     {
         $solicitud = Solicitud::Included()->findOrFail($id);
@@ -546,9 +570,18 @@ class SolicitudController extends Controller
  *     )
  * )
  */
+    /**
+     * Actualiza una solicitud existente.
+     *
+     * @param  \App\Http\Requests\UpdateRequest  $request  La solicitud de actualización validada.
+     * @param  int  $id  El ID de la solicitud a actualizar.
+     * @return \Illuminate\Http\JsonResponse  La respuesta JSON con la solicitud actualizada.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para actualizar la solicitud.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra la solicitud con el ID proporcionado.
+     */
     public function update(UpdateRequest $request, $id)
     {
-        //dd($id);
         $data = $request->validated();
         $solicitud = Solicitud::findOrFail($id);
         Gate::authorize('update', $solicitud);

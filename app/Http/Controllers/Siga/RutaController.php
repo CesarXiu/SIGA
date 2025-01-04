@@ -101,6 +101,15 @@ class RutaController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra una lista de recursos de Ruta.
+     *
+     * Este método autoriza al usuario para ver cualquier recurso de Ruta
+     * utilizando la política de autorización definida en Gate.
+     * Luego, devuelve una respuesta JSON con una colección de recursos de Ruta.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de recursos de Ruta.
+     */
     public function index()
     {
         Gate::authorize('viewAny', Ruta::class);
@@ -230,6 +239,19 @@ class RutaController extends Controller
  *     )
  * )
  */
+
+    /**
+     * Almacena una nueva ruta en la base de datos.
+     *
+     * Este método autoriza al usuario para crear una nueva ruta utilizando
+     * la política de autorización 'create' en el modelo Ruta. Luego, valida
+     * los datos de la solicitud y crea una nueva instancia de Ruta con los
+     * datos validados. Finalmente, devuelve una respuesta JSON con los
+     * recursos de la nueva ruta creada.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos de la nueva ruta.
+     * @return \Illuminate\Http\JsonResponse Una respuesta JSON con los recursos de la nueva ruta creada.
+     */
     public function store(Request $request)
     {
         Gate::authorize('create', Ruta::class);
@@ -330,6 +352,14 @@ class RutaController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra la información de una ruta específica.
+     *
+     * @param int $id El ID de la ruta a mostrar.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON con los datos de la ruta.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para ver la ruta.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra la ruta con el ID proporcionado.
+     */
     public function show($id)
     {
         $ruta = Ruta::findOrFail($id);
@@ -469,6 +499,15 @@ class RutaController extends Controller
  *     )
  * )
  */
+    /**
+     * Actualiza una ruta existente con los datos proporcionados en la solicitud.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados para actualizar la ruta.
+     * @param int $id El ID de la ruta que se va a actualizar.
+     * @return \Illuminate\Http\JsonResponse Una respuesta JSON que contiene la representación de la ruta actualizada.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para actualizar la ruta.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra una ruta con el ID proporcionado.
+     */
     public function update(Request $request, $id)
     {
         $data = $request->validated();
@@ -477,6 +516,16 @@ class RutaController extends Controller
         $ruta->update($data);
         return response()->json($ruta->resource());
     }
+    /**
+     * Actualiza en masa los endpoints de las rutas especificadas.
+     *
+     * @param \App\Http\Requests\RutaEndPointBulkRequest $request La solicitud que contiene los datos validados.
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con un mensaje de éxito.
+     *
+     * Este método recibe una solicitud con los datos validados, obtiene las rutas especificadas
+     * y actualiza el endpoint de cada una de ellas. Finalmente, devuelve una respuesta JSON
+     * indicando que las rutas fueron actualizadas correctamente.
+     */
     public function bulkUpdate(RutaEndPointBulkRequest $request)
     {
         $data = $request->validated();
@@ -492,6 +541,14 @@ class RutaController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * Elimina una ruta específica.
+     *
+     * @param int $id El ID de la ruta a eliminar.
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con estado 204 (Sin Contenido) si la eliminación es exitosa.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para eliminar la ruta.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra la ruta con el ID proporcionado.
      */
     public function destroy($id)
     {

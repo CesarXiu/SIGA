@@ -84,6 +84,15 @@ class ScopeController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra una lista de todos los recursos Scope.
+     *
+     * Este método autoriza al usuario para ver cualquier recurso Scope
+     * utilizando la política definida en Gate. Luego, devuelve una
+     * respuesta JSON con una colección de todos los recursos Scope.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de recursos Scope y un código de estado 200.
+     */
     public function index()
     {
         Gate::authorize('viewAny',Scope::class);
@@ -183,6 +192,16 @@ class ScopeController extends Controller
  *     )
  * )
  */
+    /**
+     * Almacena un nuevo recurso Scope en la base de datos.
+     *
+     * Este método valida la solicitud entrante, autoriza la creación del recurso
+     * utilizando una política de autorización y luego crea y devuelve el nuevo recurso.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP entrante que contiene los datos validados.
+     * @return \Illuminate\Http\JsonResponse Una respuesta JSON que contiene el recurso creado y un código de estado 201.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para crear el recurso.
+     */
     public function store(Request $request)
     {
         $data = $request->validated();
@@ -270,6 +289,15 @@ class ScopeController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra la información de un Scope específico.
+     *
+     * Este método autoriza al usuario para ver el recurso Scope y 
+     * devuelve la información del Scope en formato JSON.
+     *
+     * @param \App\Models\Scope $scope El Scope que se va a mostrar.
+     * @return \Illuminate\Http\JsonResponse La respuesta en formato JSON con la información del Scope.
+     */
     public function show(Scope $scope)
     {
         Gate::authorize('view',Scope::class);
@@ -379,6 +407,14 @@ class ScopeController extends Controller
  *     )
  * )
  */
+    /**
+     * Actualiza el recurso Scope con los datos validados de la solicitud.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados.
+     * @param \App\Models\Scope $scope La instancia del modelo Scope que se va a actualizar.
+     * @return \Illuminate\Http\JsonResponse Una respuesta JSON con el recurso actualizado y un código de estado 200.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para actualizar el recurso.
+     */
     public function update(Request $request, Scope $scope)
     {
         $data = $request->validated();
@@ -432,6 +468,14 @@ class ScopeController extends Controller
  *     )
  * )
  */
+    /**
+     * Elimina el recurso especificado.
+     *
+     * @param  \App\Models\Scope  $scope  El recurso Scope a eliminar.
+     * @return \Illuminate\Http\JsonResponse  Respuesta JSON con estado 204 (No Content) si la eliminación fue exitosa.
+     * 
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para eliminar el recurso.
+     */
     public function destroy(Scope $scope)
     {
         Gate::authorize('delete',$scope);

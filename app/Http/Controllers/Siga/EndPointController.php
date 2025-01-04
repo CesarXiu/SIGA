@@ -82,6 +82,16 @@ class EndPointController extends Controller
  *     )
  * )
  */
+    /**
+     * Método para obtener una colección de recursos de EndPoint.
+     *
+     * Este método autoriza al usuario para ver cualquier instancia de EndPoint
+     * utilizando la política de autorización 'viewAny'. Luego, retorna una
+     * respuesta JSON con una colección de recursos de EndPoint, incluyendo
+     * las relaciones especificadas en el método 'Included'.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de recursos de EndPoint.
+     */
     public function index()
     {
         Gate::authorize('viewAny', EndPoint::class);
@@ -174,6 +184,17 @@ class EndPointController extends Controller
  *     )
  * )
  */
+    /**
+     * Almacena un nuevo recurso EndPoint.
+     *
+     * Este método valida la solicitud entrante, autoriza la creación de un nuevo
+     * recurso EndPoint y lo almacena en la base de datos. Luego, devuelve una
+     * respuesta JSON con el recurso creado.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP entrante.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON con el recurso creado.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para crear el recurso.
+     */
     public function store(Request $request)
     {
         $data = $request->validated();
@@ -259,6 +280,14 @@ class EndPointController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra el recurso EndPoint especificado.
+     *
+     * @param  int  $id  El ID del recurso EndPoint a mostrar.
+     * @return \Illuminate\Http\JsonResponse  La respuesta JSON con el recurso EndPoint.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra el recurso EndPoint.
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para ver el recurso EndPoint.
+     */
     public function show($id)
     {
         $endPoint = EndPoint::findOrFail($id);
@@ -363,6 +392,16 @@ class EndPointController extends Controller
  *     )
  * )
  */
+/**
+ * Actualiza un recurso EndPoint existente.
+ *
+ * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados.
+ * @param int $id El identificador del recurso EndPoint a actualizar.
+ * @return \Illuminate\Http\JsonResponse La respuesta JSON que contiene el recurso EndPoint actualizado.
+ *
+ * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para ver el recurso EndPoint.
+ * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el recurso EndPoint con el ID proporcionado.
+ */
 public function update(Request $request, $id)
 {
     $data = $request->validated();
@@ -411,6 +450,14 @@ public function update(Request $request, $id)
  *     )
  * )
  */
+    /**
+     * Elimina un recurso EndPoint especificado por su ID.
+     *
+     * @param  int  $id  El ID del recurso EndPoint a eliminar.
+     * @return \Illuminate\Http\JsonResponse  Respuesta JSON con estado 204 (No Content) si la eliminación fue exitosa.
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para eliminar el recurso.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra el recurso EndPoint con el ID especificado.
+     */
     public function destroy($id)
     {
         $endPoint = EndPoint::findOrFail($id);

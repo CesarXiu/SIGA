@@ -92,6 +92,15 @@ class CompartidoController extends Controller
  *     )
  * )
  */
+    /**
+     * Método para obtener una colección de recursos compartidos.
+     *
+     * Este método autoriza al usuario para ver cualquier recurso de tipo Compartido,
+     * luego obtiene los recursos compartidos aplicando los scopes "Included" y "Filtered",
+     * y finalmente retorna una respuesta JSON con la colección de recursos compartidos.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de recursos compartidos.
+     */
     public function index()
     {
         Gate::authorize('viewAny', Compartido::class);
@@ -204,6 +213,14 @@ class CompartidoController extends Controller
  *     )
  * )
  */
+    /**
+     * Almacena un nuevo recurso compartido en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request  La solicitud HTTP que contiene los datos validados.
+     * @return \Illuminate\Http\JsonResponse  La respuesta JSON que contiene el recurso compartido creado.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para crear el recurso.
+     */
     public function store(Request $request)
     {
         $data = $request->validated();
@@ -293,6 +310,14 @@ class CompartidoController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra el recurso compartido especificado.
+     *
+     * @param  int  $id  El ID del recurso compartido a mostrar.
+     * @return \Illuminate\Http\JsonResponse  La respuesta JSON con el recurso compartido.
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para ver el recurso.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra el recurso compartido.
+     */
     public function show($id)
     {
         $compartido = Compartido::findOrFail($id);
@@ -409,6 +434,16 @@ class CompartidoController extends Controller
  *     )
  * )
  */
+    /**
+     * Actualiza un recurso compartido existente.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados.
+     * @param int $id El ID del recurso compartido a actualizar.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON que contiene el recurso compartido actualizado.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para actualizar el recurso.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el recurso compartido con el ID proporcionado.
+     */
     public function update(Request $request, $id)
     {
         $compartido = Compartido::findOrFail($id);
@@ -419,6 +454,15 @@ class CompartidoController extends Controller
         ]);
         return response()->json($compartido->resource());
     }
+    /**
+     * Actualiza en masa los registros de Compartido.
+     *
+     * @param \App\Http\Requests\CompartidoBulkUpdate $request La solicitud que contiene los datos validados.
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con un mensaje de éxito.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para actualizar el registro.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el modelo Compartido.
+     */
     public function bulkUpdate(CompartidoBulkUpdate $request)
     {
         $data = $request->validated();

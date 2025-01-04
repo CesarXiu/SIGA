@@ -112,6 +112,17 @@ class ConsumidorController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra una lista de recursos de Consumidor.
+     *
+     * Este método autoriza al usuario para ver cualquier recurso de Consumidor
+     * utilizando la política de autorización 'viewAny'. Luego, devuelve una
+     * colección de recursos de Consumidor en formato JSON, aplicando los
+     * métodos 'Included' y 'Filtered' para incluir relaciones y filtrar los
+     * resultados según sea necesario.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
         Gate::authorize('viewAny', Consumidor::class);
@@ -121,6 +132,13 @@ class ConsumidorController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * Almacena un nuevo consumidor en la base de datos.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados del consumidor.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON que contiene los datos del nuevo consumidor, client_id y client_secret.
+     * @throws \Exception Si ocurre un error durante la creación del consumidor.
      */
     public function store(Request $request)
     {
@@ -251,6 +269,14 @@ class ConsumidorController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra la información de un consumidor específico.
+     *
+     * @param int $id El ID del consumidor a mostrar.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON con la información del consumidor.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para ver el consumidor.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el consumidor con el ID proporcionado.
+     */
     public function show($id)
     {
         $consumidor = Consumidor::findOrFail($id);
@@ -396,11 +422,20 @@ class ConsumidorController extends Controller
  *     )
  * )
  */
+    /**
+     * Actualiza la información de un consumidor existente.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados.
+     * @param int $id El ID del consumidor que se va a actualizar.
+     * @return \Illuminate\Http\JsonResponse Una respuesta JSON con los datos del consumidor actualizado.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para ver el consumidor.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el consumidor con el ID proporcionado.
+     */
     public function update(Request $request, $id)
     {
         $data = $request->validated();
         $consumidor = Consumidor::findOrFail($id);
-        Gate::authorize('view', $consumidor);
+        Gate::authorize('update', $consumidor);
         $consumidor->update($data);
         return response()->json($consumidor->resource());
     }
@@ -447,10 +482,18 @@ class ConsumidorController extends Controller
  *     )
  * )
  */
+    /**
+     * Elimina un consumidor específico.
+     *
+     * @param int $id El ID del consumidor a eliminar.
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con un mensaje de confirmación.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para eliminar el consumidor.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el consumidor con el ID proporcionado.
+     */
     public function destroy( $id)
     {
         $consumidor = Consumidor::findOrFail($id);
-        Gate::authorize('view', $consumidor);
+        Gate::authorize('delete', $consumidor);
         $consumidor->delete();
         ClientController::deleteClient($consumidor['appid']);
         return response()->json(['message' => 'Consumidor eliminado']);

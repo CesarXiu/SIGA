@@ -80,6 +80,12 @@ class AuthController extends Controller
  * )
  */
     
+    /**
+     * Método para obtener la información del usuario autenticado.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene la información del usuario autenticado.
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con los datos del usuario.
+     */
     public function me(Request $request){
         $user = $request->user();
         return response()->json(data: ["data" => [
@@ -89,6 +95,21 @@ class AuthController extends Controller
             'rol' => $user->rol
         ]]);
     }
+    /**
+     * Maneja el inicio de sesión de un usuario.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene las credenciales del usuario.
+     * @return \Illuminate\Http\RedirectResponse Redirige al usuario a la página deseada si las credenciales son correctas,
+     * o regresa a la página anterior con un mensaje de error si las credenciales son incorrectas.
+     *
+     * Validaciones:
+     * - 'email': Requerido, debe existir en la tabla 'users' en la columna 'email'.
+     * - 'password': Requerido, debe ser una cadena de texto.
+     *
+     * Autenticación:
+     * - Si las credenciales son correctas, redirige al usuario a la página deseada.
+     * - Si las credenciales son incorrectas, regresa a la página anterior con un mensaje de error.
+     */
     public function login(Request $request){
         $validated = $request->validate([
             'email' => ['bail', 'required', 'exists:users,email'],
@@ -134,6 +155,17 @@ class AuthController extends Controller
  *     )
  * )
  */
+    /**
+     * Método para cerrar sesión del usuario autenticado.
+     *
+     * Este método realiza las siguientes acciones:
+     * 1. Obtiene el usuario autenticado.
+     * 2. Revoca el token de autenticación del usuario.
+     * 3. Invalida la sesión actual.
+     * 4. Elimina las cookies de autenticación.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con un mensaje de éxito y las cookies eliminadas.
+     */
     public function logout(){
         $user = auth()->user();
         $token = $user->token();
@@ -148,6 +180,22 @@ class AuthController extends Controller
         return response()->json(['message' => "Token y Sesion removidos correctamente"], 200)->withCookie($cookie)->withCookie($cookie2);;
     }
 
+    /**
+     * Registra un nuevo usuario en la aplicación.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos de registro del usuario.
+     * 
+     * @return \Illuminate\Http\RedirectResponse Redirige al usuario a la página de inicio de sesión con un mensaje de éxito.
+     * 
+     * @throws \Illuminate\Validation\ValidationException Si la validación de los datos de entrada falla.
+     * 
+     * Validaciones:
+     * - 'email': Requerido, debe ser un email válido y único en la tabla 'users'.
+     * - 'name': Requerido, debe ser único en la tabla 'users'.
+     * - 'password': Requerido, debe ser una cadena y debe coincidir con la confirmación de contraseña.
+     * 
+     * Crea un nuevo usuario con los datos validados y encripta la contraseña antes de guardarla en la base de datos.
+     */
     public function register(Request $request){
         $validated = $request->validate([
             'email' => ['bail', 'required', 'email', 'unique:users,email'],
@@ -219,6 +267,26 @@ class AuthController extends Controller
  *     )
  * )
  */
+    /**
+     * Autentica a un consumidor basado en un token JWT y valida su acceso a una ruta específica.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene el token JWT y los parámetros de ruta.
+     * @return \Illuminate\Http\JsonResponse Una respuesta JSON que indica el resultado de la autenticación y la validación de acceso.
+     *
+     * Este método realiza las siguientes acciones:
+     * 1. Obtiene el token JWT de la solicitud.
+     * 2. Decodifica el payload del JWT.
+     * 3. Busca al consumidor en la base de datos usando el 'appid' del payload.
+     * 4. Si el consumidor existe y está activo, lo autentica.
+     * 5. Valida si el rol del consumidor está activo.
+     * 6. Obtiene y valida los permisos del rol del consumidor para acceder a la ruta solicitada.
+     * 7. Verifica si la ruta y el método existen y están activos en la base de datos.
+     * 8. Verifica si el consumidor tiene el scope necesario para acceder a la ruta.
+     * 9. Retorna una respuesta JSON con el resultado de la autenticación y la validación de acceso.
+     *
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si el consumidor no es encontrado.
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException Si el consumidor o su rol están desactivados, o si no tiene los permisos necesarios.
+     */
     public function auth_consumer(Request $request){
         $jwtPayload = $request->bearerToken(); // Obtener el token JWT
 

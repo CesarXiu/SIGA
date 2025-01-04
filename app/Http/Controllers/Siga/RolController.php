@@ -85,6 +85,15 @@ class RolController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra una lista de roles.
+     *
+     * Este método autoriza al usuario para ver cualquier rol utilizando la política 'viewAny'.
+     * Luego, devuelve una respuesta JSON con una colección de recursos de roles,
+     * incluyendo las relaciones especificadas en el método 'Included'.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de roles.
+     */
     public function index()
     {
         Gate::authorize('viewAny', Rol::class);
@@ -179,6 +188,17 @@ class RolController extends Controller
  *     )
  * )
  */
+
+    /**
+     * Almacena un nuevo rol en la base de datos.
+     *
+     * Este método valida la solicitud entrante, autoriza la creación de un nuevo rol
+     * y luego crea el rol con los datos proporcionados. Finalmente, devuelve una
+     * respuesta JSON con el recurso del rol creado y un código de estado 201.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos del rol.
+     * @return \Illuminate\Http\JsonResponse Una respuesta JSON con el recurso del rol creado y un código de estado 201.
+     */
     public function store(Request $request)
     {
         $data = $request->validated();
@@ -264,6 +284,14 @@ class RolController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra la información de un rol específico.
+     *
+     * @param int $id El ID del rol a mostrar.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON con la información del rol.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para ver el rol.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el rol con el ID proporcionado.
+     */
     public function show($id)
     {
         $rol = Rol::findOrFail($id);
@@ -369,6 +397,16 @@ class RolController extends Controller
  *     )
  * )
  */
+    /**
+     * Actualiza un rol existente.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados.
+     * @param int $id El ID del rol a actualizar.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON con el recurso del rol actualizado.
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para actualizar el rol.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el rol con el ID proporcionado.
+     */
     public function update(Request $request, $id)
     {
         $data = $request->validated();
@@ -419,6 +457,14 @@ class RolController extends Controller
  *     )
  * )
  */
+    /**
+     * Elimina un rol específico.
+     *
+     * @param int $id El ID del rol a eliminar.
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con estado 204 (No Content) si la eliminación fue exitosa.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para eliminar el rol.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el rol con el ID proporcionado.
+     */
     public function destroy($id)
     {
         $rol = Rol::findOrFail($id);

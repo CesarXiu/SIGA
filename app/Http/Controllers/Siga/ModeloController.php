@@ -107,6 +107,15 @@ class ModeloController extends Controller
  *     )
  * )
  */
+
+    /**
+     * Método para obtener y devolver una colección de modelos en formato JSON.
+     *
+     * Este método autoriza al usuario para ver cualquier modelo utilizando la política 'viewAny'.
+     * Luego, obtiene los modelos filtrados y los devuelve como una colección de recursos en formato JSON.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de modelos.
+     */
     public function index()
     {
         Gate::authorize('viewAny', Modelos::class);
@@ -252,6 +261,17 @@ class ModeloController extends Controller
  *     )
  * )
  */
+
+    /**
+     * Almacena un nuevo modelo en la base de datos.
+     *
+     * Este método valida la solicitud entrante, autoriza la acción de creación
+     * utilizando Gate, crea un nuevo modelo con los datos validados y devuelve
+     * una respuesta JSON con el recurso del modelo creado y un código de estado 201.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP entrante.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON con el recurso del modelo creado.
+     */
     public function store(Request $request)
     {
         $data = $request->validated();
@@ -359,6 +379,14 @@ class ModeloController extends Controller
  *     )
  * )
  */
+    /**
+     * Muestra el modelo especificado.
+     *
+     * @param  int  $id  El ID del modelo a mostrar.
+     * @return \Illuminate\Http\JsonResponse  La respuesta JSON con los datos del modelo.
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para ver el modelo.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra el modelo con el ID especificado.
+     */
     public function show($id)
     {
         $modelo = Modelos::findOrFail($id);
@@ -516,6 +544,16 @@ class ModeloController extends Controller
  *     )
  * )
  */
+
+    /**
+     * Actualiza un modelo existente.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos validados.
+     * @param int $id El identificador del modelo a actualizar.
+     * @return \Illuminate\Http\JsonResponse La respuesta JSON que contiene el recurso del modelo actualizado.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para actualizar el modelo.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Si no se encuentra el modelo con el ID proporcionado.
+     */
     public function update(Request $request, $id)
     {
         $data = $request->validated();
@@ -566,6 +604,14 @@ class ModeloController extends Controller
  *     )
  * )
  */
+    /**
+     * Elimina un modelo específico.
+     *
+     * @param  int  $id  El ID del modelo a eliminar.
+     * @return \Illuminate\Http\JsonResponse  Respuesta JSON con estado 204 (sin contenido) si la eliminación fue exitosa.
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para eliminar el modelo.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra el modelo con el ID proporcionado.
+     */
     public function destroy($id)
     {
         $modelo = Modelos::findOrFail($id);

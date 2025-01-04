@@ -96,6 +96,14 @@ class PermisoController extends Controller
     *     )
     * )
     */
+    /**
+     * Muestra una lista de todos los permisos.
+     *
+     * Este método autoriza al usuario para ver cualquier permiso utilizando la política 'viewAny'
+     * y luego devuelve una respuesta JSON con una colección de recursos de todos los permisos.
+     *
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con la colección de permisos.
+     */
     public function index()
     {
         Gate::authorize('viewAny', Permiso::class);
@@ -207,6 +215,17 @@ class PermisoController extends Controller
     *     )
     * )
     */
+
+    /**
+     * Almacena un nuevo permiso en la base de datos.
+     *
+     * Este método valida los datos de la solicitud, autoriza la creación del permiso
+     * y luego crea un nuevo registro en la base de datos utilizando los datos validados.
+     *
+     * @param \Illuminate\Http\Request $request La solicitud HTTP que contiene los datos del permiso.
+     * @return \Illuminate\Database\Eloquent\Model El modelo de Permiso recién creado.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para crear un permiso.
+     */
     public function store(Request $request)
     {
         $data = $request->validated();
@@ -281,6 +300,17 @@ class PermisoController extends Controller
     *     )
     * )
     */
+    /**
+     * Almacena múltiples permisos (scopes) en la base de datos.
+     *
+     * Este método valida la solicitud entrante utilizando PermisoBulkRequest,
+     * autoriza la acción de creación de permisos utilizando Gate, y luego
+     * itera sobre los scopes proporcionados en los datos validados para crear
+     * nuevos registros de permisos en la base de datos.
+     *
+     * @param  \App\Http\Requests\PermisoBulkRequest  $request  La solicitud que contiene los datos validados.
+     * @return \Illuminate\Http\JsonResponse  Una respuesta JSON con un mensaje de éxito y un código de estado 201.
+     */
     public function storeScopes(PermisoBulkRequest $request)
     {
         $data = $request->validated();
@@ -361,6 +391,13 @@ class PermisoController extends Controller
     *     )
     * )
     */
+    /**
+     * Elimina los permisos de los alcances especificados para un rol dado.
+     *
+     * @param PermisoBulkRequest $request La solicitud que contiene los datos validados.
+     * @return \Illuminate\Http\JsonResponse Respuesta JSON con un mensaje de éxito.
+     * @throws \Illuminate\Auth\Access\AuthorizationException Si el usuario no está autorizado para eliminar permisos.
+     */
     public function deleteScopes(PermisoBulkRequest $request)
     {
         $data = $request->validated();
@@ -375,6 +412,14 @@ class PermisoController extends Controller
 
     /**
      * Display the specified resource.
+     */
+    /**
+     * Muestra el permiso especificado.
+     *
+     * @param  int  $id  El ID del permiso a mostrar.
+     * @return \Illuminate\Http\JsonResponse  La respuesta JSON con los datos del permiso.
+     * @throws \Illuminate\Auth\Access\AuthorizationException  Si el usuario no está autorizado para ver el permiso.
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException  Si no se encuentra el permiso con el ID especificado.
      */
     public function show($id)
     {
