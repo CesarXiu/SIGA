@@ -6,10 +6,19 @@ use App\Models\Siga\EndPoint;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
+
+/**
+ * Clase EndPointPolicy
+ * 
+ * Esta clase define las políticas de acceso para el modelo EndPoint.
+ */
 class EndPointPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determina si el usuario puede ver cualquier modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @return bool Retorna true si el rol del usuario es 'admin', de lo contrario false.
      */
     public function viewAny(User $user): bool
     {
@@ -17,7 +26,11 @@ class EndPointPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determina si el usuario puede ver el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param EndPoint $endPoint El modelo EndPoint que se desea ver.
+     * @return bool Retorna true si el rol del usuario es 'admin', de lo contrario false.
      */
     public function view(User $user, EndPoint $endPoint): bool
     {
@@ -25,7 +38,10 @@ class EndPointPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determina si el usuario puede crear modelos.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @return bool Retorna true si el rol del usuario es 'admin', de lo contrario false.
      */
     public function create(User $user): bool
     {
@@ -33,7 +49,11 @@ class EndPointPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determina si el usuario puede actualizar el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param EndPoint $endPoint El modelo EndPoint que se desea actualizar.
+     * @return bool Retorna true si el rol del usuario es 'admin', de lo contrario false.
      */
     public function update(User $user, EndPoint $endPoint): bool
     {
@@ -41,7 +61,11 @@ class EndPointPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determina si el usuario puede eliminar el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param EndPoint $endPoint El modelo EndPoint que se desea eliminar.
+     * @return bool Retorna true si el rol del usuario es 'admin', de lo contrario false.
      */
     public function delete(User $user, EndPoint $endPoint): bool
     {
@@ -49,7 +73,11 @@ class EndPointPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determina si el usuario puede restaurar el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param EndPoint $endPoint El modelo EndPoint que se desea restaurar.
+     * @return bool Retorna false ya que no se permite restaurar el modelo.
      */
     public function restore(User $user, EndPoint $endPoint): bool
     {
@@ -57,7 +85,11 @@ class EndPointPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determina si el usuario puede eliminar permanentemente el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param EndPoint $endPoint El modelo EndPoint que se desea eliminar permanentemente.
+     * @return bool Retorna false ya que no se permite eliminar permanentemente el modelo.
      */
     public function forceDelete(User $user, EndPoint $endPoint): bool
     {

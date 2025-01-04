@@ -1,3 +1,25 @@
+{{-- 
+    Vista de la página de inicio de sesión para la aplicación SIGA.
+
+    Extiende la plantilla principal 'layout.layout'.
+
+    Sección 'content':
+    - Contenedor principal con un fondo degradado y centrado vertical y horizontalmente.
+    - Logo de la aplicación en la parte superior.
+    - Formulario de inicio de sesión centrado con un diseño responsivo y estilizado.
+
+    Formulario de inicio de sesión:
+    - Acción: Enviar los datos del formulario a la ruta 'login.post' mediante el método POST.
+    - Protección CSRF: Incluye un token CSRF para proteger contra ataques de falsificación de solicitudes.
+    - Manejo de errores: Muestra mensajes de error específicos para los campos 'email' y 'password', así como mensajes de éxito o error generales.
+    - Campos:
+        - Correo Electrónico: Campo de entrada de tipo email con validación y manejo de errores.
+        - Contraseña: Campo de entrada de tipo password con validación y manejo de errores.
+    - Botón de envío: Botón estilizado para enviar el formulario.
+    - Enlace de registro: Enlace para redirigir a la página de registro si el usuario no tiene una cuenta.
+
+    Comentario:
+--}}
 @extends('layout.layout')
 
 @section('content')
@@ -59,44 +81,4 @@
             <a href="{{route('register')}}" class="text-blue-500 hover:text-blue-700 underline font-semibold">Don't have an account? Register here</a>
         </div>
     </div>
-<!--<form action="{{route('login.post')}}" method="POST">
-    @csrf
-    @error('success')
-        <div class="success">
-            {{$message}}
-        </div>
-        <br><br>
-    @enderror
-    @error('error')
-        <div class="error">
-            {{$message}}
-        </div>
-        <br><br>
-    @enderror
-    <div class="form-input">
-        <label for="email">Email</label>
-        <br>
-        <input type="email" name="email" placeholder="Enter email" value="{{old('email')}}">
-        <div class="error">
-            @error('email')
-                {{$message}}
-            @enderror
-        </div>
-    </div>
-
-    <div class="form-input">
-        <label for="password">Password</label>
-        <br>
-        <input type="password" name="password" placeholder="Enter password">
-        <div class="error">
-            @error('password')
-                {{$message}}
-            @enderror
-        </div>
-    </div>
-    <br>
-    <button type="submit">Login</button>
-    <br>
-    Don't have an account? <a href="{{route('register')}}">Register here</a>
-</form>-->
 @endsection

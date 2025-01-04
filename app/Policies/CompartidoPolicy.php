@@ -6,10 +6,23 @@ use App\Models\Siga\Compartido;
 use App\Models\User;
 use App\Models\Siga\Consumidor;
 
+
+/**
+ * Clase CompartidoPolicy
+ * 
+ * Esta clase define las políticas de autorización para el modelo Compartido.
+ */
 class CompartidoPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Verifica si el usuario tiene permisos para realizar una acción basada en su rol y ciertos filtros de solicitud.
+     *
+     * @param \App\Models\User $user El usuario que realiza la solicitud.
+     * @return bool Verdadero si el usuario tiene permisos, falso en caso contrario.
+     *
+     * - Si el usuario tiene el rol de 'admin', se le concede permiso automáticamente.
+     * - Si los filtros de solicitud contienen 'usuario' y 'activo', se verifica que el ID del usuario coincida y que el estado 'activo' sea 1.
+     * - Si el filtro de solicitud contiene 'consumidor', se busca el consumidor y se verifica que el ID del propietario coincida con el ID del usuario.
      */
     public function viewAny(User $user): bool
     {
@@ -27,7 +40,16 @@ class CompartidoPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determina si el usuario puede ver el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Compartido $compartido El modelo Compartido que se desea ver.
+     * @return bool Verdadero si el usuario puede ver el modelo, falso en caso contrario.
+     * 
+     * Casos en los que se aprueba:
+     * - El usuario tiene el rol de 'admin'.
+     * - El usuario es el propietario del modelo Compartido.
+     * - El usuario es el creador del modelo Compartido y el modelo está activo.
      */
     public function view(User $user, Compartido $compartido): bool
     {
@@ -36,11 +58,19 @@ class CompartidoPolicy
         }
         $propietario = $compartido->getConsumidor['propietario'];
         unset($compartido->getConsumidor);
-        return ((string) $user->id === $compartido->usuario && $compartido->activo == 1) || (string) $user->id === (string) $propietario;//
+        return ((string) $user->id === $compartido->usuario && $compartido->activo == 1) || (string) $user->id === (string) $propietario;
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determina si el usuario puede crear modelos.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param array $data Los datos necesarios para crear el modelo.
+     * @return bool Verdadero si el usuario puede crear el modelo, falso en caso contrario.
+     * 
+     * Casos en los que se aprueba:
+     * - Si el usuario tiene el rol de 'admin'.
+     * - Si el usuario es el propietario del consumidor especificado en los datos.
      */
     public function create(User $user, $data): bool
     {
@@ -53,7 +83,15 @@ class CompartidoPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determina si el usuario puede actualizar el modelo.
+     * 
+     * Casos en los que se aprueba:
+     * - Si el usuario tiene el rol de 'admin'.
+     * - Si el usuario es el propietario del modelo Compartido.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Compartido $compartido El modelo Compartido que se desea actualizar.
+     * @return bool Verdadero si el usuario puede actualizar el modelo, falso en caso contrario.
      */
     public function update(User $user, Compartido $compartido): bool
     {
@@ -62,11 +100,20 @@ class CompartidoPolicy
         }
         $propietario = $compartido->getConsumidor['propietario'];
         unset($compartido->getConsumidor);
-        return (string)$user->id === (string)$propietario;//$user->id === $compartido->usuario;
+        return (string)$user->id === (string)$propietario;
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determina si el usuario puede eliminar el modelo.
+     * 
+     * Este método permite determinar si un usuario tiene permiso para eliminar un modelo Compartido.
+     * 
+     * Casos en los que se aprueba:
+     * - El usuario tiene el rol de 'admin'.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Compartido $compartido El modelo Compartido que se desea eliminar.
+     * @return bool Verdadero si el usuario puede eliminar el modelo, falso en caso contrario.
      */
     public function delete(User $user, Compartido $compartido): bool
     {
@@ -74,7 +121,11 @@ class CompartidoPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determina si el usuario puede restaurar el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Compartido $compartido El modelo Compartido que se desea restaurar.
+     * @return bool Siempre retorna falso, ya que no se permite restaurar el modelo.
      */
     public function restore(User $user, Compartido $compartido): bool
     {
@@ -82,7 +133,11 @@ class CompartidoPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determina si el usuario puede eliminar permanentemente el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Compartido $compartido El modelo Compartido que se desea eliminar permanentemente.
+     * @return bool Siempre retorna falso, ya que no se permite eliminar permanentemente el modelo.
      */
     public function forceDelete(User $user, Compartido $compartido): bool
     {

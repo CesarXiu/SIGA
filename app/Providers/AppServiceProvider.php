@@ -34,9 +34,27 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
-
     /**
-     * Bootstrap any application services.
+     * Método boot del proveedor de servicios de la aplicación.
+     *
+     * Este método se ejecuta durante el arranque de la aplicación y se utiliza para definir políticas de acceso y configurar la expiración de los tokens de Passport.
+     *
+     * - Definición de las políticas:
+     *   - Solicitud: SolicitudPolicy
+     *   - Scope: ScopePolicy
+     *   - Modelos: ModeloPolicy
+     *   - Ruta: RutaPolicy
+     *   - Rol: RolPolicy
+     *   - Permiso: PermisoPolicy
+     *   - EndPoint: EndPointPolicy
+     *   - Consumidor: ConsumidorPolicy
+     *   - Compartido: CompartidoPolicy
+     *
+     * - Configuración de Passport:
+     *   - Los tokens expiran en 12 horas.
+     *   - Los tokens de refresco expiran en 7 días.
+     *
+     * @return void
      */
     public function boot(): void
     {

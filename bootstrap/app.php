@@ -8,6 +8,18 @@ use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Configuración de la aplicación.
+ *
+ * Este archivo configura la aplicación utilizando el método `Application::configure()`.
+ * 
+ * - Establece la ruta base de la aplicación.
+ * - Configura las rutas web, API, comandos de consola y la ruta de salud.
+ * - Define alias para middlewares.
+ * - Maneja excepciones y define una respuesta JSON personalizada para errores 404 en rutas API.
+ *
+ * @return \Application
+ */
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',

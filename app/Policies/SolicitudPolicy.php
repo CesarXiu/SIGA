@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 class SolicitudPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Determina si el usuario puede ver cualquier modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @return bool Verdadero si el usuario es administrador o si el filtro de propietario coincide con el ID del usuario, falso en caso contrario.
      */
     public function viewAny(User $user): bool
     {
@@ -23,7 +26,11 @@ class SolicitudPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determina si el usuario puede ver el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Solicitud $solicitud La solicitud que se quiere ver.
+     * @return bool Verdadero si el usuario es administrador o si el usuario es el propietario de la solicitud, falso en caso contrario.
      */
     public function view(User $user, Solicitud $solicitud): bool
     {
@@ -34,7 +41,10 @@ class SolicitudPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determina si el usuario puede crear modelos.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @return bool Siempre verdadero.
      */
     public function create(User $user): bool
     {
@@ -42,7 +52,11 @@ class SolicitudPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determina si el usuario puede actualizar el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Solicitud $solicitud La solicitud que se quiere actualizar.
+     * @return bool Verdadero si el usuario es administrador o si el usuario es el propietario de la solicitud, falso en caso contrario.
      */
     public function update(User $user, Solicitud $solicitud): bool
     {
@@ -53,7 +67,11 @@ class SolicitudPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determina si el usuario puede eliminar el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Solicitud $solicitud La solicitud que se quiere eliminar.
+     * @return bool Verdadero si el usuario es administrador, falso en caso contrario.
      */
     public function delete(User $user, Solicitud $solicitud): bool
     {
@@ -61,7 +79,11 @@ class SolicitudPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determina si el usuario puede restaurar el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Solicitud $solicitud La solicitud que se quiere restaurar.
+     * @return bool Siempre falso.
      */
     public function restore(User $user, Solicitud $solicitud): bool
     {
@@ -69,7 +91,11 @@ class SolicitudPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determina si el usuario puede eliminar permanentemente el modelo.
+     * 
+     * @param User $user El usuario que realiza la solicitud.
+     * @param Solicitud $solicitud La solicitud que se quiere eliminar permanentemente.
+     * @return bool Siempre falso.
      */
     public function forceDelete(User $user, Solicitud $solicitud): bool
     {

@@ -1,3 +1,25 @@
+{{-- 
+    Vista de registro de usuario en Laravel utilizando Blade.
+
+    Extiende la plantilla 'layout.layout'.
+
+    Sección 'content':
+    - Contenedor principal con un fondo degradado y centrado.
+    - Imagen del logo centrada.
+    - Formulario de registro dentro de un contenedor con estilo.
+    
+    Formulario de registro:
+    - Acción: Enviar datos al método 'register.post' mediante POST.
+    - Protección CSRF.
+    - Manejo de mensajes de éxito y error.
+    - Campos del formulario:
+        - Email: Campo de entrada para el correo electrónico con validación de errores.
+        - Username: Campo de entrada para el nombre de usuario con validación de errores.
+        - Password: Campo de entrada para la contraseña con validación de errores.
+        - Confirm Password: Campo de entrada para confirmar la contraseña.
+    - Botón de envío del formulario.
+    - Enlace para redirigir a la página de inicio de sesión si ya se tiene una cuenta.
+--}}
 @extends('layout.layout')
 
 @section('content')
