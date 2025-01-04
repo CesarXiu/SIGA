@@ -4,10 +4,18 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Clase RutaEndPointBulkRequest
+ * 
+ * Esta clase maneja la validación y autorización de solicitudes masivas relacionadas con rutas y endpoints.
+ * Extiende de FormRequest para aprovechar las funcionalidades de validación y autorización de Laravel.
+ */
 class RutaEndPointBulkRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determina si el usuario está autorizado para realizar esta solicitud.
+     * 
+     * @return bool Retorna verdadero si el usuario tiene el rol de 'admin', de lo contrario, retorna falso.
      */
     public function authorize(): bool
     {
@@ -15,9 +23,13 @@ class RutaEndPointBulkRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Obtiene las reglas de validación que se aplican a la solicitud.
+     * 
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string> 
+     *         Retorna un arreglo con las reglas de validación para los campos 'endpoint' y 'rutas'.
+     *         - 'endpoint': Debe ser un string requerido que cumpla con el formato UUID y existir en la tabla 'endpoints' en la columna 'enid'.
+     *         - 'rutas': Debe ser un arreglo requerido.
+     *         - 'rutas.*': Cada elemento del arreglo 'rutas' debe ser un string requerido que cumpla con el formato UUID y existir en la tabla 'rutas' en la columna 'ruid'.
      */
     public function rules(): array
     {
