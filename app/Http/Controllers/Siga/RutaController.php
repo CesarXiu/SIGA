@@ -113,7 +113,7 @@ class RutaController extends Controller
     public function index()
     {
         Gate::authorize('viewAny', Ruta::class);
-        return response()->json(Ruta::resourceCollection(Ruta::all()));
+        return response()->json(Ruta::resourceCollection(Ruta::Included()->get()));
     }
 
 /**

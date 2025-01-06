@@ -36,7 +36,10 @@ class Ruta extends Model
         'endpoint',
         'scope'
     ]; // Atributos que se pueden asignar masivamente.
-    
+    protected $allowIncluded = [
+        'Endpoint',
+        'Scope'
+    ];
     /**
      * Define los tipos de datos de los atributos.
      * 

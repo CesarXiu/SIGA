@@ -20,17 +20,32 @@ class RutaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $ruta =  $this->resource;
+        // Verifica si la relación 'getScope' está cargada
+        if ($ruta->relationLoaded('getScope')) {
+            $relation = $ruta->getScope;
+            $scopes = ["Scope" => $relation->resource()['data']];
+        }
+        // Verifica si la relación 'getEndpoint' está cargada
+        if ($ruta->relationLoaded('getEndpoint')) {
+            $relation = $ruta->getEndpoint;
+            $endpoint = ["EndPoint" => $relation->resource()['data']];
+        }
+
+        // Combina las relaciones en un array
+        $relationships = array_merge($scopes ?? [] , $endpoint ?? []);
         return [
-            'id' => $this->ruid, // El identificador único de la ruta.
+            'id' => $ruta->ruid, // El identificador único de la ruta.
             'type' => 'ruta', // El tipo de recurso, en este caso 'ruta'.
             'attributes' => [
-                'metodo' => $this->metodo, // El método HTTP asociado a la ruta (GET, POST, etc.).
-                'descripcion' => $this->descripcion, // Una descripción de la ruta.
-                'ruta' => $this->ruta, // La URL o ruta específica.
-                'activo' => $this->activo, // Indica si la ruta está activa o no.
-                'endpoint' => $this->endpoint, // El endpoint asociado a la ruta.
-                'scope' => $this->scope, // El alcance o ámbito de la ruta.
+                'metodo' => $ruta->metodo, // El método HTTP asociado a la ruta (GET, POST, etc.).
+                'descripcion' => $ruta->descripcion, // Una descripción de la ruta.
+                'ruta' => $ruta->ruta, // La URL o ruta específica.
+                'activo' => $ruta->activo, // Indica si la ruta está activa o no.
+                'endpoint' => $ruta->endpoint, // El endpoint asociado a la ruta.
+                'scope' => $ruta->scope, // El alcance o ámbito de la ruta.
             ],
+            'relationships' => $relationships // Las relaciones asociadas a la ruta.
         ];
     }
 }
