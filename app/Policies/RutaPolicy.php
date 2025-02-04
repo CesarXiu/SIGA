@@ -32,6 +32,7 @@ class RutaPolicy
      */
     public function view(User $user, Ruta $ruta): bool
     {
+        \Log::info('Politica');
         return true;
     }
 

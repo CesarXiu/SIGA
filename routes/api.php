@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Route;
     TODOS SE ENCUENTRAN BAJO EL NAMESPACE App\Http\Controllers\Siga
     A EXCEPCION DE AuthController QUE SE ENCUENTRA EN App\Http\Controllers\Oauth
 */
-use App\Http\Controllers\Oauth\AuthController;
-use App\Http\Controllers\Siga\ScopeController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Siga\RolController;
-use App\Http\Controllers\Siga\ConsumidorController;
-use App\Http\Controllers\Siga\CompartidoController;
+use App\Http\Controllers\Siga\RutaController;
+use App\Http\Controllers\Siga\ScopeController;
+use App\Http\Controllers\Oauth\AuthController;
+use App\Http\Controllers\Siga\ModeloController;
 use App\Http\Controllers\Siga\PermisoController;
 use App\Http\Controllers\Siga\EndPointController;
-use App\Http\Controllers\Siga\RutaController;
 use App\Http\Controllers\Siga\SolicitudController;
-use App\Http\Controllers\Siga\ModeloController;
+use App\Http\Controllers\Siga\ConsumidorController;
+use App\Http\Controllers\Siga\CompartidoController;
 // MODELOS
 // RUTAS DE AUTENTICACION //
 Route::get('/me', [AuthController::class,"me"])->middleware('auth:api'); //OBTEN LA INFORMACION DEL USUARIO AUTENTICADO
@@ -27,6 +28,7 @@ Route::delete('permisos/scopes', [PermisoController::class, 'deleteScopes'])->mi
 Route::put('rutas/endpoint', [RutaController::class, 'bulkUpdate'])->middleware('auth:api');//CAMBIA EL ENDPOINT DE UNA LISTA DE RUTAS
 Route::put('compartidos', [CompartidoController::class, 'bulkUpdate'])->middleware('auth:api');//ACTUALIZA UNA LISTA DE COMPARTIDOS (ESTADO ACTIVO)
 // RUTAS DE SIGA //
+Route::apiResource('users', UsuarioController::class)->middleware('auth:api'); //RUTAS DE LOS USUARIOS PARA EL MANEJO DE LOS USUARIOS
 Route::apiResource('scopes', ScopeController::class)->middleware('auth:api'); //RUTAS DE LOS SCOPES PARA EL MANEJO DE LOS ALCANCES
 Route::apiResource('roles', RolController::class)->middleware('auth:api'); //RUTAS DE LOS ROLES PARA EL MANEJO DE LOS PERMISOS POR USUARIO
 Route::apiResource('consumidores', ConsumidorController::class)->middleware('auth:api'); //RUTAS DE LOS CONSUMIDORES PARA EL MANEJO DE LOS PERMISOS DE ACCESO
