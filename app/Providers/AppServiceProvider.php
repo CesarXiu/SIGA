@@ -15,6 +15,7 @@ use App\Models\Siga\Permiso;
 use App\Models\Siga\EndPoint;
 use App\Models\Siga\Consumidor;
 use App\Models\Siga\Compartido;
+use App\Models\User;
 // Importacion de las Politicas
 use App\Policies\SolicitudPolicy;
 use App\Policies\ScopePolicy;
@@ -25,6 +26,7 @@ use App\Policies\PermisoPolicy;
 use App\Policies\EndPointPolicy;
 use App\Policies\ConsumidorPolicy;
 use App\Policies\CompartidoPolicy;
+use App\Policies\UserPolicy;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -68,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(EndPoint::class, EndPointPolicy::class);
         Gate::policy(Consumidor::class, ConsumidorPolicy::class);
         Gate::policy(Compartido::class, CompartidoPolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
         // CONFIGURACION DE PASSPORT
         Passport::tokensExpireIn(now()->addHours(12));
         Passport::refreshTokensExpireIn(now()->addDays(7));

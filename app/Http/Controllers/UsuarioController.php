@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest as Request;
+use Illuminate\Support\Facades\Gate;
 
 class UsuarioController extends Controller
 {
@@ -12,7 +13,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-
+        Gate::authorize('viewAny', User::class);
+        $users = User::all();
+        return response()->json(User::resourceCollection($users), 200);
     }
 
     /**
@@ -20,8 +23,10 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $users = User::all();
-        return response()->json(User::resourceCollection($users), 200);
+        Gate::authorize('create', User::class);
+        $data = $request->validated();
+        $user = User::create($data);
+        return response()->json($user->resource(), 200);
     }
 
     /**
@@ -29,6 +34,7 @@ class UsuarioController extends Controller
      */
     public function show(User $user)
     {
+        Gate::authorize('show', User::class);
         return response()->json($user->resource(), 200);
     }
 
@@ -37,6 +43,11 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        Gate::authorize('update', $user);
+        $data = $request->validated();
+        $data['password'] = $data['password'] ?? $user->password;
+        $user->update($data);
+        return response()->json($user->resource(), 200);
     }
 
     /**
@@ -44,6 +55,8 @@ class UsuarioController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        Gate::authorize('delete', $user);
+        $user->delete();
+        return response()->json(null, 204);
     }
 }

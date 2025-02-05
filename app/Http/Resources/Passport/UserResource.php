@@ -26,6 +26,7 @@ class UserResource extends JsonResource
             'attributes' => [
                 'name' => $this->name, // El nombre del usuario.
                 'email' => $this->email, // El correo electrónico del usuario.
+                'verified' => $this->email_verified_at !== null, // Si el correo electrónico del usuario ha sido verificado.
                 'rol' => $this->rol, // El rol del usuario.
                 'created_at' => Carbon::parse($this->created_at)->diffForHumans() // La fecha de creación del usuario en un formato legible.
             ],
